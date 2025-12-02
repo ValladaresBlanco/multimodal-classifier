@@ -1,0 +1,42 @@
+# Python cache & build artifacts
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+*.egg-info/
+.dist-info/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
+
+# IDE/editor configs
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Data directories (raw/processed datasets)
+data/raw/
+!data/raw/metadata.csv
+data/processed/
+
+# Model artifacts and checkpoints
+models/checkpoints/
+models/saved/
+
+# Results/visualizations/logs
+results/
+logs/
+
+# Temporary captures or recordings
+capture_*.wav
+capture_*.jpg
+
+# Misc
+*.tmp
+*.bak
