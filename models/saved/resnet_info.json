@@ -1,0 +1,18 @@
+{
+    "model_type": "resnet",
+    "num_classes": 3,
+    "class_names": [
+        "rose",
+        "sunflower",
+        "tulip"
+    ],
+    "final_val_accuracy": 83.33333333333333,
+    "epochs": 20,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "image_size": [
+        224,
+        224
+    ],
+    "pretrained": true
+}

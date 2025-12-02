@@ -58,12 +58,15 @@ class ImagePreprocessor:
             A.Normalize(mean=self.mean, std=self.std)
         ] if self.normalize else []
         
+        # Convertir a tensor PyTorch
+        to_tensor_transforms = [ToTensorV2()]
+        
         # Combinar todas las transformaciones
-        all_transforms = basic_transforms + augmentation_transforms + normalize_transforms
+        all_transforms = basic_transforms + augmentation_transforms + normalize_transforms + to_tensor_transforms
         
         self.transform = A.Compose(all_transforms)
     
-    def preprocess(self, image: np.ndarray) -> np.ndarray:
+    def preprocess(self, image: np.ndarray):
         """
         Preprocesar una imagen
         
@@ -71,7 +74,7 @@ class ImagePreprocessor:
             image: Imagen en formato numpy (H, W, C) BGR
             
         Returns:
-            Imagen preprocesada (H, W, C) RGB normalizada
+            Tensor PyTorch (C, H, W) normalizado
         """
         # Convertir BGR a RGB (OpenCV carga en BGR)
         if len(image.shape) == 3 and image.shape[2] == 3:
@@ -79,7 +82,7 @@ class ImagePreprocessor:
         else:
             image_rgb = image
         
-        # Aplicar transformaciones
+        # Aplicar transformaciones (incluye ToTensorV2 que retorna tensor)
         transformed = self.transform(image=image_rgb)
         processed_image = transformed['image']
         

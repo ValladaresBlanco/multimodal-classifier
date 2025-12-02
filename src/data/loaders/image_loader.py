@@ -52,15 +52,15 @@ class ImageDataset(Dataset):
         if image is None:
             raise ValueError(f"No se pudo cargar: {img_path}")
         
-        # Preprocesar
+        # Preprocesar (ahora retorna tensor directamente)
         if self.preprocessor:
-            image = self.preprocessor.preprocess(image)
-        
-        # Convertir a tensor (C, H, W)
-        if len(image.shape) == 3:
-            image_tensor = torch.from_numpy(image).permute(2, 0, 1).float()
+            image_tensor = self.preprocessor.preprocess(image)
         else:
-            image_tensor = torch.from_numpy(image).float()
+            # Si no hay preprocessor, convertir manualmente
+            if len(image.shape) == 3:
+                image_tensor = torch.from_numpy(image).permute(2, 0, 1).float()
+            else:
+                image_tensor = torch.from_numpy(image).float()
         
         label = self.labels[idx]
         

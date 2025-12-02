@@ -164,11 +164,15 @@ def train_model(
         save_path=save_path
     )
     
-    # 4. EVALUAR
-    print(f"\n📈 PASO 4: Evaluación final...")
+    # 4. EVALUAR CON MÉTRICAS COMPLETAS
+    print(f"\n📈 PASO 4: Evaluación final con métricas completas...")
     
-    results = model.evaluate(val_loader)
-    print(f"   • Accuracy en validación: {results['accuracy']:.2f}%")
+    results = model.evaluate(
+        val_loader, 
+        class_names=class_info['class_names'],
+        save_dir=f"results/evaluation/{model_type}"
+    )
+    print(f"\n   ✅ Accuracy en validación: {results['accuracy']:.2f}%")
     
     # 5. VISUALIZAR
     print(f"\n📊 PASO 5: Generando visualizaciones...")

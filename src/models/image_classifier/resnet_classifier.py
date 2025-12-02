@@ -13,6 +13,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent.parent.parent))
 
 from src.models.base_model import BaseClassifier
+from src.utils.evaluation import evaluate_model_complete
 
 
 class ResNetClassifier(BaseClassifier):
@@ -30,6 +31,7 @@ class ResNetClassifier(BaseClassifier):
                 - freeze_backbone: Si congelar capas base
         """
         super().__init__(config)
+        self.config = config  # Store config for save_model
         self.num_classes = config.get('num_classes', 10)
         self.pretrained = config.get('pretrained', True)
         self.freeze_backbone = config.get('freeze_backbone', False)
@@ -104,9 +106,17 @@ class ResNetClassifier(BaseClassifier):
         # Configurar optimizador y loss
         criterion = nn.CrossEntropyLoss()
         optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
-        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            optimizer, mode='min', factor=0.5, patience=3, verbose=True
-        )
+        # Some PyTorch builds may not accept the `verbose` kwarg; try to create
+        # the scheduler with `verbose=True` and fall back to a version without
+        # the kwarg if TypeError is raised.
+        try:
+            scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+                optimizer, mode='min', factor=0.5, patience=3, verbose=True
+            )
+        except TypeError:
+            scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+                optimizer, mode='min', factor=0.5, patience=3
+            )
         
         history = {
             'train_loss': [],
@@ -247,15 +257,18 @@ class ResNetClassifier(BaseClassifier):
         
         return predicted.item()
     
-    def evaluate(self, test_loader) -> Dict[str, float]:
+    def evaluate(self, test_loader, class_names: Optional[list] = None, 
+                 save_dir: str = "results/evaluation") -> Dict[str, float]:
         """
-        Evaluar el modelo
+        Evaluar el modelo con métricas completas y visualizaciones
         
         Args:
             test_loader: DataLoader de test
+            class_names: Nombres de las clases (opcional)
+            save_dir: Directorio para guardar resultados
             
         Returns:
-            Diccionario con métricas
+            Diccionario con métricas completas
         """
         self.model.eval()
         correct = 0
@@ -278,6 +291,20 @@ class ResNetClassifier(BaseClassifier):
                 all_labels.extend(labels.cpu().numpy())
         
         accuracy = 100. * correct / total
+        
+        # Si se proveen class_names, generar evaluación completa
+        if class_names:
+            eval_results = evaluate_model_complete(
+                all_labels, all_predictions, class_names,
+                model_name="resnet", save_dir=save_dir
+            )
+            return {
+                'accuracy': accuracy,
+                'predictions': all_predictions,
+                'labels': all_labels,
+                'confusion_matrix': eval_results['confusion_matrix'],
+                'metrics': eval_results['metrics']
+            }
         
         return {
             'accuracy': accuracy,
