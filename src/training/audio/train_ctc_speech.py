@@ -6,7 +6,9 @@ import argparse
 import sys
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).parent.parent.parent))
+ROOT_DIR = Path(__file__).resolve().parents[3]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.append(str(ROOT_DIR))
 
 from src.data.loaders.audio_loader import AudioDataModule
 from src.models.audio_recognizer.ctc_speech_recognizer import CTCSpeechRecognizer
@@ -25,6 +27,12 @@ def train_ctc_speech(
     grad_clip: float = 5.0,
     save_dir: str = "models/checkpoints",
     seed: int = 42,
+    num_workers: int = 0,
+    pin_memory: bool = False,
+    persistent_workers: bool | None = None,
+    max_train_samples: int | None = None,
+    max_val_samples: int | None = None,
+    max_test_samples: int | None = None,
 ):
     """Entrena un modelo speech-to-text basado en CTC."""
 
@@ -39,7 +47,12 @@ def train_ctc_speech(
         metadata_csv=metadata_csv,
         audio_root=audio_root_path,
         batch_size=batch_size,
-        num_workers=0,
+        num_workers=num_workers,
+        pin_memory=pin_memory,
+        persistent_workers=persistent_workers,
+        max_train_samples=max_train_samples,
+        max_val_samples=max_val_samples,
+        max_test_samples=max_test_samples,
     )
     train_loader, val_loader, test_loader = data_module.dataloaders()
 
@@ -116,6 +129,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dropout", type=float, default=0.2)
     parser.add_argument("--grad-clip", type=float, default=5.0)
     parser.add_argument("--save-dir", type=str, default="models/checkpoints")
+    parser.add_argument("--num-workers", type=int, default=0, help="Workers para DataLoader (usar >0 acelera CPU)")
+    parser.add_argument("--pin-memory", action="store_true", help="Activa pin_memory en DataLoader")
+    parser.add_argument(
+        "--persistent-workers",
+        action="store_true",
+        help="Mantiene workers vivos entre batches (requiere num_workers>0)",
+    )
+    parser.add_argument("--max-train-samples", type=int, help="Limita muestras de train para sesiones rápidas")
+    parser.add_argument("--max-val-samples", type=int, help="Limita muestras de validación")
+    parser.add_argument("--max-test-samples", type=int, help="Limita muestras de test")
     return parser.parse_args()
 
 
@@ -132,6 +155,12 @@ def main():
         dropout=args.dropout,
         grad_clip=args.grad_clip,
         save_dir=args.save_dir,
+        num_workers=args.num_workers,
+        pin_memory=args.pin_memory,
+        persistent_workers=args.persistent_workers if args.num_workers > 0 else False,
+        max_train_samples=args.max_train_samples,
+        max_val_samples=args.max_val_samples,
+        max_test_samples=args.max_test_samples,
     )
 
 

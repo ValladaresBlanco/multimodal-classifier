@@ -30,6 +30,8 @@ La segunda parte del proyecto se centra en reconocimiento de voz con Connectioni
 			--epochs 30 --batch-size 8
 	```
 	El script guarda el mejor checkpoint en `models/checkpoints/ctc_speech_<timestamp>.pth` junto con `ctc_speech_info.json` (tokenizer, preprocessing y métricas).
+	- Para sesiones rápidas añade `--max-train-samples 40 --max-val-samples 10 --max-test-samples 10` y reduce épocas.
+	- Usa `--num-workers 2 --pin-memory --persistent-workers` si tu CPU lo permite para acelerar el DataLoader.
 
 ### 3. Transcripción en tiempo real
 - `src/app/realtime/audio_transcriber.py` captura audio del micrófono (usando `sounddevice`), procesa ventanas de 3 s y muestra el texto en vivo.

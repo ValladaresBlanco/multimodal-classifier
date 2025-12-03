@@ -88,6 +88,11 @@ class AudioDataModule:
         audio_root: str | Path | None = None,
         batch_size: int = 8,
         num_workers: int = 0,
+        pin_memory: bool = False,
+        persistent_workers: bool | None = None,
+        max_train_samples: int | None = None,
+        max_val_samples: int | None = None,
+        max_test_samples: int | None = None,
         preprocess_config: AudioPreprocessConfig | None = None,
         vocab: List[str] | None = None,
         seed: int = 42,
@@ -98,6 +103,14 @@ class AudioDataModule:
         self.audio_root = Path(audio_root) if audio_root else self.metadata_csv.parent
         self.batch_size = batch_size
         self.num_workers = num_workers
+        self.pin_memory = pin_memory
+        if self.num_workers == 0:
+            self.persistent_workers = False
+        else:
+            self.persistent_workers = persistent_workers if persistent_workers is not None else True
+        self.max_train_samples = max_train_samples
+        self.max_val_samples = max_val_samples
+        self.max_test_samples = max_test_samples
         self.seed = seed
         self.val_ratio = val_ratio
         self.test_ratio = test_ratio
@@ -111,6 +124,7 @@ class AudioDataModule:
             raise ValueError("Se requieren al menos 100 audios etiquetados para entrenar el modelo CTC.")
 
         self._ensure_splits()
+        self._apply_subset_limits()
 
     def _load_metadata(self) -> List[AudioSample]:
         if not self.metadata_csv.exists():
@@ -155,6 +169,22 @@ class AudioDataModule:
 
         self.samples = train + val + test
 
+    def _apply_subset_limits(self) -> None:
+        rng = random.Random(self.seed)
+        limited_samples: list[AudioSample] = []
+        for split, limit in (
+            ("train", self.max_train_samples),
+            ("val", self.max_val_samples),
+            ("test", self.max_test_samples),
+        ):
+            split_entries = [s for s in self.samples if s.split == split]
+            if limit is not None and len(split_entries) > limit:
+                rng.shuffle(split_entries)
+                split_entries = split_entries[:limit]
+            limited_samples.extend(split_entries)
+        if limited_samples:
+            self.samples = limited_samples
+
     def _build_dataset(self, split: str) -> AudioCTCDataset:
         entries = [s for s in self.samples if s.split == split]
         augment = split == "train"
@@ -172,6 +202,8 @@ class AudioDataModule:
             shuffle=True,
             num_workers=self.num_workers,
             collate_fn=ctc_collate_fn,
+            pin_memory=self.pin_memory,
+            persistent_workers=self.persistent_workers,
         )
         val_loader = DataLoader(
             val_ds,
@@ -179,6 +211,8 @@ class AudioDataModule:
             shuffle=False,
             num_workers=self.num_workers,
             collate_fn=ctc_collate_fn,
+            pin_memory=self.pin_memory,
+            persistent_workers=self.persistent_workers,
         )
         test_loader = (
             DataLoader(
@@ -187,6 +221,8 @@ class AudioDataModule:
                 shuffle=False,
                 num_workers=self.num_workers,
                 collate_fn=ctc_collate_fn,
+                pin_memory=self.pin_memory,
+                persistent_workers=self.persistent_workers,
             )
             if test_ds
             else None

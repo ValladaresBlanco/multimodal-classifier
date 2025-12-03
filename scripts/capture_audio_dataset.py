@@ -102,3 +102,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    # Ejecutar el transcriptor de audio en tiempo real (reemplazar con la ruta correcta de tu entorno)
+    # !C:/multimodal-classifier/.venv/Scripts/python.exe -m src.app.realtime.audio_transcriber --model models/checkpoints/ctc_speech_20251203-031147.pth --info models/checkpoints/ctc_speech_info.json --window 3 --chunk 0.5

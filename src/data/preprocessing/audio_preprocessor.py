@@ -6,8 +6,15 @@ from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Tuple
 
+import soundfile as sf
 import torch
 import torchaudio
+
+try:
+    torchaudio.set_audio_backend("soundfile")
+except (AttributeError, RuntimeError):
+    # Si no está disponible soundfile, Torchaudio usará el backend por defecto.
+    pass
 
 
 @dataclass(slots=True)
@@ -72,10 +79,13 @@ class AudioPreprocessor:
         return base
 
     def load_waveform(self, path: str | Path) -> torch.Tensor:
-        """Load audio file, convert to mono, and resample."""
-        waveform, sr = torchaudio.load(str(path))
-        if waveform.size(0) > 1:
-            waveform = waveform.mean(dim=0, keepdim=True)
+        """Load audio file with soundfile to avoid torchcodec dependency."""
+        audio_np, sr = sf.read(str(path), dtype="float32")
+        waveform = torch.from_numpy(audio_np)
+        if waveform.dim() == 1:
+            waveform = waveform.unsqueeze(0)
+        else:
+            waveform = waveform.transpose(0, 1).mean(dim=0, keepdim=True)
         if sr != self.config.sample_rate:
             waveform = torchaudio.functional.resample(waveform, sr, self.config.sample_rate)
         return waveform
