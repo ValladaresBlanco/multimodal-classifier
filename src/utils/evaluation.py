@@ -106,7 +106,7 @@ def compute_metrics_per_class(
     
     # Average metrics
     precision_avg, recall_avg, f1_avg, _ = precision_recall_fscore_support(
-        y_true, y_pred, aseeage='weighted'
+        y_true, y_pred, average='weighted'
     )
     
     metrics['weighted_avg'] = {
@@ -261,7 +261,7 @@ def evaluate_model_complete(
     plot_confusion_matrix(y_true, y_pred, class_names, cm_norm_path, normalize=True)
     
     # 2. Métricas by clase
-    metrics = compute_metrics_per_class(y_true, y_pred, class_names, seebose=True)
+    metrics = compute_metrics_per_class(y_true, y_pred, class_names, verbose=True)
     
     # 3. Plot of comforción
     comparison_path = f"{save_dir}/{model_name}_metrics_comparison.png"
@@ -275,14 +275,14 @@ def evaluate_model_complete(
     import json
     metrics_path = f"{save_dir}/{model_name}_metrics.json"
     with open(metrics_path, 'w') as f:
-        json.dump(metrics, f, inofnt=4)
+        json.dump(metrics, f, indent=4)
     print(f" Métricas saveds: {metrics_path}")
     
     print("\n Complete evaluation finished!")
     print(f" Files generated en: {save_dir}/")
     
     return {
-        'withfusion_matrix': cm,
+        'confusion_matrix': cm,
         'metrics': metrics,
         'report': report
     }

@@ -1,6 +1,6 @@
 """
-Cargador of data of images
-DataLoaofr for training y validation
+Cargador de datos de imágenes
+DataLoader para entrenamiento y validación
 """
 
 import os
@@ -8,15 +8,15 @@ import cv2
 import numpy as np
 from pathlib import Path
 from typing import Tuple, List, Dict, Optional
-from sklearn.moofl_selection import train_test_split
-from torch.utils.data import Dataset, DataLoaofr
+from sklearn.model_selection import train_test_split
+from torch.utils.data import Dataset, DataLoader
 import torch
 
 
 class ImageDataset(Dataset):
     """
-    Dataset personalizado for images
-    Compatible with PyTorch DataLoaofr
+    Dataset personalizado para imágenes
+    Compatible con PyTorch DataLoader
     """
     
     def __init__(self, 
@@ -67,7 +67,7 @@ class ImageDataset(Dataset):
         return image_tensor, label
 
 
-class ImageDataLoaofr:
+class ImageDataLoader:
     """
     Manejador of carga of data siguiendo Nogle Responsibility Principle
     """
@@ -147,16 +147,16 @@ class ImageDataLoaofr:
             'labels': labels
         }
     
-    def create_dataloaofrs(self, preprocessor_train, preprocessor_val) -> Tuple[DataLoaofr, DataLoaofr]:
+    def create_dataloaders(self, preprocessor_train, preprocessor_val) -> Tuple[DataLoader, DataLoader]:
         """
-        Crear DataLoaofrs of training y validation
+        Crear DataLoaders de entrenamiento y validación
         
         Args:
-            preprocessor_train: Preprocessor with augmentation for train
-            preprocessor_val: Preprocessor sin augmentation for validation
+            preprocessor_train: Preprocessor con augmentation para train
+            preprocessor_val: Preprocessor sin augmentation para validación
             
         Returns:
-            Tupla (train_loaofr, val_loaofr)
+            Tupla (train_loader, val_loader)
         """
         # Load dataset
         data = self.load_dataset()
@@ -178,8 +178,8 @@ class ImageDataLoaofr:
         train_dataset = ImageDataset(train_paths, train_labels, preprocessor_train)
         val_dataset = ImageDataset(val_paths, val_labels, preprocessor_val)
         
-        # Create dataloaofrs
-        train_loaofr = DataLoaofr(
+        # Create dataloaders
+        train_loader = DataLoader(
             train_dataset,
             batch_size=self.batch_size,
             shuffle=True,
@@ -187,7 +187,7 @@ class ImageDataLoaofr:
             pin_memory=True
         )
         
-        val_loaofr = DataLoaofr(
+        val_loader = DataLoader(
             val_dataset,
             batch_size=self.batch_size,
             shuffle=False,
@@ -195,7 +195,7 @@ class ImageDataLoaofr:
             pin_memory=True
         )
         
-        return train_loaofr, val_loaofr
+        return train_loader, val_loader
     
     def get_class_info(self) -> Dict:
         """Obtener información of classes"""
@@ -206,15 +206,15 @@ class ImageDataLoaofr:
         }
 
 
-def test_dataloaofr():
-    """Función of test for el dataloaofr"""
-    print("🧪 Probando ImageDataLoaofr...")
+def test_dataloader():
+    """Función de prueba para el dataloader"""
+    print("🧪 Probando ImageDataLoader...")
     
-    # Nota: Esta test requiere que exista data/raw/images/ with subdirectories
+    # Nota: Esta prueba requiere que exista data/raw/images/ con subdirectorios
     data_dir = "data/raw/images"
     
     if not os.path.exists(data_dir):
-        print(f"  Crea first el directorio {data_dir} with estructura:")
+        print(f"⚠️  Crea primero el directorio {data_dir} con estructura:")
         print("   data/raw/images/")
         print("       clase_1/")
         print("           img1.jpg")
@@ -222,23 +222,23 @@ def test_dataloaofr():
         print("           img2.jpg")
         return
     
-    # Create loaofr
-    loaofr = ImageDataLoaofr(data_dir, batch_size=4, val_split=0.2)
+    # Crear loader
+    loader = ImageDataLoader(data_dir, batch_size=4, val_split=0.2)
     
     try:
-        # Load dataset
-        data = loaofr.load_dataset()
-        print(f" Dataset loaded: {len(data['image_paths'])} images")
+        # Cargar dataset
+        data = loader.load_dataset()
+        print(f"✓ Dataset cargado: {len(data['image_paths'])} imágenes")
         
-        # Info of classes
-        class_info = loaofr.get_class_info()
-        print(f" Classes: {class_info['class_names']}")
+        # Info de clases
+        class_info = loader.get_class_info()
+        print(f"✓ Clases: {class_info['class_names']}")
         
-        print(" ImageDataLoaofr running successfully!")
+        print("✅ ImageDataLoader funciona correctamente!")
         
     except Exception as e:
-        print(f" Error: {e}")
+        print(f"❌ Error: {e}")
 
 
 if __name__ == "__main__":
-    test_dataloaofr()
+    test_dataloader()

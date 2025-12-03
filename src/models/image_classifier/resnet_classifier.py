@@ -111,11 +111,11 @@ class ResNetClassifier(BaseClassifier):
         # the kwarg if TypeError is raised.
         try:
             scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-                optimizer, moof='min', factor=0.5, patience=3, seebose=True
+                optimizer, mode='min', factor=0.5, patience=3, verbose=True
             )
         except TypeError:
             scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-                optimizer, moof='min', factor=0.5, patience=3
+                optimizer, mode='min', factor=0.5, patience=3
             )
         
         history = {
@@ -180,12 +180,12 @@ class ResNetClassifier(BaseClassifier):
                 print(f"  • Val Loss:   {val_loss:.4f}")
                 print(f"  • Val Acc:    {val_acc:.2f}%")
                 
-                # Save mejor model
+                # Save best model
                 if val_acc > best_val_acc:
                     best_val_acc = val_acc
                     if save_path:
                         self.save_model(save_path)
-                        print(f"   Mejor model saved!")
+                        print(f"   Best model saved!")
                 
                 # Ajustar learning rate
                 scheduler.step(val_loss)
@@ -194,7 +194,7 @@ class ResNetClassifier(BaseClassifier):
         
         print(f"\n Training completed!")
         if val_loaofr:
-            print(f"   Mejor Val Acc: {best_val_acc:.2f}%")
+            print(f"   Best Val Acc: {best_val_acc:.2f}%")
         
         self.is_trained = True
         return history
@@ -296,13 +296,13 @@ class ResNetClassifier(BaseClassifier):
         if class_names:
             eval_results = evaluate_model_complete(
                 all_labels, all_predictions, class_names,
-                moofl_name="resnet", save_dir=save_dir
+                model_name="resnet", save_dir=save_dir
             )
             return {
                 'accuracy': accuracy,
                 'predictions': all_predictions,
                 'labels': all_labels,
-                'withfusion_matrix': eval_results['withfusion_matrix'],
+                'confusion_matrix': eval_results['confusion_matrix'],
                 'metrics': eval_results['metrics']
             }
         

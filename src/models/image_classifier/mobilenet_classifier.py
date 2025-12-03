@@ -83,11 +83,11 @@ class MobileNetClassifier(BaseClassifier):
         optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
         try:
             scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-                optimizer, moof='min', factor=0.5, patience=3, seebose=True
+                optimizer, mode='min', factor=0.5, patience=3, verbose=True
             )
         except TypeError:
             scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-                optimizer, moof='min', factor=0.5, patience=3
+                optimizer, mode='min', factor=0.5, patience=3
             )
         
         history = {
@@ -149,7 +149,7 @@ class MobileNetClassifier(BaseClassifier):
                     best_val_acc = val_acc
                     if save_path:
                         self.save_model(save_path)
-                        print(f"   Mejor model saved!")
+                        print(f"   Best model saved!")
                 
                 scheduler.step(val_loss)
             
@@ -157,7 +157,7 @@ class MobileNetClassifier(BaseClassifier):
         
         print(f"\n Training completed!")
         if val_loaofr:
-            print(f"   Mejor Val Acc: {best_val_acc:.2f}%")
+            print(f"   Best Val Acc: {best_val_acc:.2f}%")
         
         self.is_trained = True
         return history
@@ -235,13 +235,13 @@ class MobileNetClassifier(BaseClassifier):
         if class_names:
             eval_results = evaluate_model_complete(
                 all_labels, all_predictions, class_names,
-                moofl_name="mobilenet", save_dir=save_dir
+                model_name="mobilenet", save_dir=save_dir
             )
             return {
                 'accuracy': accuracy,
                 'predictions': all_predictions,
                 'labels': all_labels,
-                'withfusion_matrix': eval_results['withfusion_matrix'],
+                'confusion_matrix': eval_results['confusion_matrix'],
                 'metrics': eval_results['metrics']
             }
         

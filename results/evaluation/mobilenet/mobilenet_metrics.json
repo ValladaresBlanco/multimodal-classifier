@@ -1,8 +1,26 @@
 {
-    "rose": {
+    "chihuahua": {
         "precision": 1.0,
-        "recall": 0.8333333333333334,
-        "f1_score": 0.9090909090909091,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "support": 5
+    },
+    "husky": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "support": 5
+    },
+    "poodle": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "support": 5
+    },
+    "rose": {
+        "precision": 0.8571428571428571,
+        "recall": 1.0,
+        "f1_score": 0.9230769230769231,
         "support": 6
     },
     "sunflower": {
@@ -12,15 +30,15 @@
         "support": 8
     },
     "tulip": {
-        "precision": 0.8,
-        "recall": 1.0,
-        "f1_score": 0.8888888888888888,
+        "precision": 1.0,
+        "recall": 0.75,
+        "f1_score": 0.8571428571428571,
         "support": 4
     },
     "weighted_avg": {
-        "precision": 0.9555555555555555,
-        "recall": 0.9444444444444444,
-        "f1_score": 0.9450056116722784,
-        "support": 18
+        "precision": 0.9740259740259739,
+        "recall": 0.9696969696969697,
+        "f1_score": 0.9686979686979686,
+        "support": 33
     }
 }

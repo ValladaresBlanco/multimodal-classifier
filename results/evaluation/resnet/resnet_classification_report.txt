@@ -1,12 +1,15 @@
-REPORTE DE CLASIFICACIÓN
+CLASSIFICATION REPORT
 ======================================================================
 
               precision    recall  f1-score   support
 
-        rose     0.8000    0.6667    0.7273         6
-   sunflower     1.0000    0.8750    0.9333         8
-       tulip     0.6667    1.0000    0.8000         4
+   chihuahua     1.0000    1.0000    1.0000         5
+       husky     1.0000    1.0000    1.0000         5
+      poodle     1.0000    1.0000    1.0000         5
+        rose     1.0000    1.0000    1.0000         6
+   sunflower     1.0000    1.0000    1.0000         8
+       tulip     1.0000    1.0000    1.0000         4
 
-    accuracy                         0.8333        18
-   macro avg     0.8222    0.8472    0.8202        18
-weighted avg     0.8593    0.8333    0.8350        18
+    accuracy                         1.0000        33
+   macro avg     1.0000    1.0000    1.0000        33
+weighted avg     1.0000    1.0000    1.0000        33
