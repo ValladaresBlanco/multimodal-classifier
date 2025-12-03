@@ -1,6 +1,6 @@
 """
-Utilidades para evaluación de modelos
-Incluye matrices de confusión, métricas por clase, y visualizaciones
+Utilities for evaluation of models
+Incluye matrices of withfusión, métricas by clase, y visualizations
 """
 
 import numpy as np
@@ -20,31 +20,31 @@ def plot_confusion_matrix(
     figsize: tuple = (10, 8)
 ) -> np.ndarray:
     """
-    Generar y visualizar matriz de confusión
+    Generate and visualize confusion matrix
     
     Args:
-        y_true: Etiquetas verdaderas
-        y_pred: Predicciones del modelo
-        class_names: Nombres de las clases
-        save_path: Ruta para guardar la figura (opcional)
-        normalize: Si normalizar por fila (mostrar porcentajes)
-        figsize: Tamaño de la figura
+        y_true: Etiquetas seedaofras
+        y_pred: Predictions of model
+        class_names: Names of las classes
+        save_path: Ruta for guardar la figura (opcional)
+        normalize: Si normalizar by fila (mostrar bycentajes)
+        figsize: Size of la figura
         
     Returns:
-        Matriz de confusión como numpy array
+        Confusion matrix as numpy array
     """
-    # Calcular matriz de confusión
+    # Calculate confusion matrix
     cm = confusion_matrix(y_true, y_pred)
     
     if normalize:
         cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
         fmt = '.2%'
-        title = 'Matriz de Confusión (Normalizada)'
+        title = 'Matriz of Confusión (Normalizada)'
     else:
         fmt = 'd'
-        title = 'Matriz de Confusión'
+        title = 'Matriz of Confusión'
     
-    # Crear figura
+    # Create figura
     plt.figure(figsize=figsize)
     sns.heatmap(
         cm,
@@ -53,18 +53,18 @@ def plot_confusion_matrix(
         cmap='Blues',
         xticklabels=class_names,
         yticklabels=class_names,
-        cbar_kws={'label': 'Predicciones' if not normalize else 'Proporción'}
+        cbar_kws={'label': 'Predictions' if not normalize else 'Probyción'}
     )
     
     plt.title(title, fontsize=14, pad=15)
-    plt.ylabel('Etiqueta Verdadera', fontsize=12)
+    plt.ylabel('Etiqueta Verdaofra', fontsize=12)
     plt.xlabel('Etiqueta Predicha', fontsize=12)
     plt.tight_layout()
     
     if save_path:
         Path(save_path).parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(save_path, dpi=150, bbox_inches='tight')
-        print(f"📊 Matriz de confusión guardada: {save_path}")
+        print(f" Confusion matrix saved: {save_path}")
     
     plt.close()
     
@@ -78,23 +78,23 @@ def compute_metrics_per_class(
     verbose: bool = True
 ) -> Dict[str, Dict[str, float]]:
     """
-    Calcular precision, recall, F1-score por clase
+    Calculate precision, recall, F1-score per class
     
     Args:
-        y_true: Etiquetas verdaderas
-        y_pred: Predicciones del modelo
-        class_names: Nombres de las clases
-        verbose: Si imprimir reporte en consola
+        y_true: True labels
+        y_pred: Model predictions
+        class_names: Names of the classes
+        verbose: Whether to print report to console
         
     Returns:
-        Diccionario con métricas por clase
+        Dictionary with metrics per class
     """
-    # Calcular métricas
+    # Calculate metrics
     precision, recall, f1, support = precision_recall_fscore_support(
         y_true, y_pred, average=None
     )
     
-    # Organizar en diccionario
+    # Organize into dictionary
     metrics = {}
     for i, class_name in enumerate(class_names):
         metrics[class_name] = {
@@ -104,9 +104,9 @@ def compute_metrics_per_class(
             'support': int(support[i])
         }
     
-    # Métricas promedio
+    # Average metrics
     precision_avg, recall_avg, f1_avg, _ = precision_recall_fscore_support(
-        y_true, y_pred, average='weighted'
+        y_true, y_pred, aseeage='weighted'
     )
     
     metrics['weighted_avg'] = {
@@ -116,14 +116,14 @@ def compute_metrics_per_class(
         'support': len(y_true)
     }
     
-    # Imprimir reporte
+    # Print report
     if verbose:
         print("\n" + "=" * 70)
-        print("📊 MÉTRICAS DE EVALUACIÓN POR CLASE")
+        print(" EVALUATION METRICS PER CLASS")
         print("=" * 70)
         
         # Header
-        print(f"{'Clase':<20} {'Precision':<12} {'Recall':<12} {'F1-Score':<12} {'Support':<10}")
+        print(f"{'Class':<20} {'Precision':<12} {'Recall':<12} {'F1-Score':<12} {'Support':<10}")
         print("-" * 70)
         
         # Por clase
@@ -136,7 +136,7 @@ def compute_metrics_per_class(
         
         # Promedio
         m = metrics['weighted_avg']
-        print(f"{'Promedio Ponderado':<20} {m['precision']:<12.4f} {m['recall']:<12.4f} "
+        print(f"{'Weighted Average':<20} {m['precision']:<12.4f} {m['recall']:<12.4f} "
               f"{m['f1_score']:<12.4f} {m['support']:<10}")
         
         print("=" * 70 + "\n")
@@ -151,16 +151,16 @@ def generate_classification_report(
     save_path: Optional[str] = None
 ) -> str:
     """
-    Generar reporte de clasificación completo
+    Generate complete classification report
     
     Args:
-        y_true: Etiquetas verdaderas
-        y_pred: Predicciones del modelo
-        class_names: Nombres de las clases
-        save_path: Ruta para guardar el reporte (opcional)
+        y_true: True labels
+        y_pred: Model predictions
+        class_names: Names of the classes
+        save_path: Path to save the report (optional)
         
     Returns:
-        String con el reporte
+        String with the report
     """
     report = classification_report(
         y_true, y_pred,
@@ -171,10 +171,10 @@ def generate_classification_report(
     if save_path:
         Path(save_path).parent.mkdir(parents=True, exist_ok=True)
         with open(save_path, 'w', encoding='utf-8') as f:
-            f.write("REPORTE DE CLASIFICACIÓN\n")
+            f.write("CLASSIFICATION REPORT\n")
             f.write("=" * 70 + "\n\n")
             f.write(report)
-        print(f"📄 Reporte guardado: {save_path}")
+        print(f" Report saved: {save_path}")
     
     return report
 
@@ -185,14 +185,14 @@ def plot_metrics_comparison(
     figsize: tuple = (12, 6)
 ):
     """
-    Graficar comparación de métricas por clase
+    Graficar comforción of métricas by clase
     
     Args:
-        metrics: Diccionario de métricas por clase
-        save_path: Ruta para guardar la figura
-        figsize: Tamaño de la figura
+        metrics: Diccionario of métricas by clase
+        save_path: Ruta for guardar la figura
+        figsize: Size of la figura
     """
-    # Extraer clases (sin el promedio)
+    # Extraer classes (sin el promedio)
     classes = [k for k in metrics.keys() if k != 'weighted_avg']
     
     precision = [metrics[c]['precision'] for c in classes]
@@ -208,9 +208,9 @@ def plot_metrics_comparison(
     ax.bar(x, recall, width, label='Recall', alpha=0.8)
     ax.bar(x + width, f1, width, label='F1-Score', alpha=0.8)
     
-    ax.set_xlabel('Clase', fontsize=12)
+    ax.set_xlabel('Class', fontsize=12)
     ax.set_ylabel('Score', fontsize=12)
-    ax.set_title('Comparación de Métricas por Clase', fontsize=14, pad=15)
+    ax.set_title('Comforción of Métricas by Class', fontsize=14, pad=15)
     ax.set_xticks(x)
     ax.set_xticklabels(classes, rotation=45, ha='right')
     ax.legend()
@@ -222,7 +222,7 @@ def plot_metrics_comparison(
     if save_path:
         Path(save_path).parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(save_path, dpi=150, bbox_inches='tight')
-        print(f"📊 Gráfica de métricas guardada: {save_path}")
+        print(f" Plot of métricas saved: {save_path}")
     
     plt.close()
 
@@ -235,39 +235,39 @@ def evaluate_model_complete(
     save_dir: str = "results/evaluation"
 ) -> Dict:
     """
-    Evaluación completa del modelo con todas las visualizaciones
+    Complete evaluation of model with all visualizations
     
     Args:
-        y_true: Etiquetas verdaderas
-        y_pred: Predicciones del modelo
-        class_names: Nombres de las clases
-        model_name: Nombre del modelo para los archivos
-        save_dir: Directorio donde guardar resultados
+        y_true: True labels
+        y_pred: Model predictions
+        class_names: Names of the classes
+        model_name: Name of model for the files
+        save_dir: Directory to save results
         
     Returns:
-        Diccionario con todas las métricas
+        Dictionary with all metrics
     """
     print("\n" + "=" * 70)
-    print(f"🎯 EVALUACIÓN COMPLETA: {model_name.upper()}")
+    print(f" COMPLETE EVALUATION: {model_name.upper()}")
     print("=" * 70)
     
     Path(save_dir).mkdir(parents=True, exist_ok=True)
     
-    # 1. Matriz de confusión (normal y normalizada)
+    # 1. Confusion matrix (normal and normalized)
     cm_path = f"{save_dir}/{model_name}_confusion_matrix.png"
     cm = plot_confusion_matrix(y_true, y_pred, class_names, cm_path, normalize=False)
     
     cm_norm_path = f"{save_dir}/{model_name}_confusion_matrix_normalized.png"
     plot_confusion_matrix(y_true, y_pred, class_names, cm_norm_path, normalize=True)
     
-    # 2. Métricas por clase
-    metrics = compute_metrics_per_class(y_true, y_pred, class_names, verbose=True)
+    # 2. Métricas by clase
+    metrics = compute_metrics_per_class(y_true, y_pred, class_names, seebose=True)
     
-    # 3. Gráfica de comparación
+    # 3. Plot of comforción
     comparison_path = f"{save_dir}/{model_name}_metrics_comparison.png"
     plot_metrics_comparison(metrics, comparison_path)
     
-    # 4. Reporte de clasificación
+    # 4. Rebyte of clasificación
     report_path = f"{save_dir}/{model_name}_classification_report.txt"
     report = generate_classification_report(y_true, y_pred, class_names, report_path)
     
@@ -275,14 +275,14 @@ def evaluate_model_complete(
     import json
     metrics_path = f"{save_dir}/{model_name}_metrics.json"
     with open(metrics_path, 'w') as f:
-        json.dump(metrics, f, indent=4)
-    print(f"💾 Métricas guardadas: {metrics_path}")
+        json.dump(metrics, f, inofnt=4)
+    print(f" Métricas saveds: {metrics_path}")
     
-    print("\n✅ Evaluación completa terminada!")
-    print(f"📁 Archivos generados en: {save_dir}/")
+    print("\n Complete evaluation finished!")
+    print(f" Files generated en: {save_dir}/")
     
     return {
-        'confusion_matrix': cm,
+        'withfusion_matrix': cm,
         'metrics': metrics,
         'report': report
     }
@@ -290,18 +290,18 @@ def evaluate_model_complete(
 
 # Test rápido
 if __name__ == "__main__":
-    print("🧪 Probando módulo de evaluación...")
+    print("🧪 Probando módulo of evaluation...")
     
-    # Datos de prueba
+    # Datos of test
     y_true = [0, 0, 1, 1, 2, 2, 0, 1, 2]
     y_pred = [0, 0, 1, 2, 2, 2, 0, 1, 1]
-    class_names = ['Clase A', 'Clase B', 'Clase C']
+    class_names = ['Class A', 'Class B', 'Class C']
     
-    # Evaluar
+    # Evaluate
     results = evaluate_model_complete(
         y_true, y_pred, class_names,
         model_name="test_model",
         save_dir="results/evaluation_test"
     )
     
-    print("✅ Módulo de evaluación funciona correctamente!")
+    print(" Módulo of evaluation running successfully!")

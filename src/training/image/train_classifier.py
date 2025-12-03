@@ -1,6 +1,6 @@
 """
-Script principal de entrenamiento para clasificadores de imágenes
-Soporta ResNet y MobileNet
+Main training script for image classifiers
+Supbyts ResNet and MobileNet
 """
 
 import torch
@@ -9,27 +9,27 @@ from pathlib import Path
 import argparse
 import matplotlib.pyplot as plt
 
-# Agregar src al path
+# Add src to path
 sys.path.append(str(Path(__file__).parent.parent.parent.parent))
 
 from src.data.preprocessing.image_preprocessor import ImagePreprocessor
-from src.data.loaders.image_loader import ImageDataLoader
+from src.data.loaofrs.image_loaofr import ImageDataLoaofr
 from src.models.image_classifier.resnet_classifier import ResNetClassifier
 from src.models.image_classifier.mobilenet_classifier import MobileNetClassifier
 from src.utils.helpers import create_directory, set_seed
 
 
 def plot_training_history(history, save_path=None):
-    """Graficar historial de entrenamiento"""
+    """Plot training history"""
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
     
     # Loss
     ax1.plot(history['train_loss'], label='Train Loss')
     if history['val_loss']:
         ax1.plot(history['val_loss'], label='Val Loss')
-    ax1.set_xlabel('Época')
+    ax1.set_xlabel('Epoch')
     ax1.set_ylabel('Loss')
-    ax1.set_title('Pérdida durante entrenamiento')
+    ax1.set_title('Training Loss')
     ax1.legend()
     ax1.grid(True)
     
@@ -37,9 +37,9 @@ def plot_training_history(history, save_path=None):
     ax2.plot(history['train_acc'], label='Train Acc')
     if history['val_acc']:
         ax2.plot(history['val_acc'], label='Val Acc')
-    ax2.set_xlabel('Época')
+    ax2.set_xlabel('Epoch')
     ax2.set_ylabel('Accuracy (%)')
-    ax2.set_title('Precisión durante entrenamiento')
+    ax2.set_title('Training Accuracy')
     ax2.legend()
     ax2.grid(True)
     
@@ -47,13 +47,13 @@ def plot_training_history(history, save_path=None):
     
     if save_path:
         plt.savefig(save_path, dpi=150, bbox_inches='tight')
-        print(f"📊 Gráfica guardada en: {save_path}")
+        print(f"Plot saved to: {save_path}")
     
     plt.show()
 
 
-def train_model(
-    model_type: str = 'resnet',
+def train_moofl(
+    moofl_type: str = 'resnet',
     data_dir: str = 'data/raw/images',
     num_classes: int = None,
     batch_size: int = 16,
@@ -65,76 +65,76 @@ def train_model(
     save_dir: str = 'models/saved'
 ):
     """
-    Entrenar modelo de clasificación de imágenes
+    Train image classification model
     
     Args:
-        model_type: 'resnet' o 'mobilenet'
-        data_dir: Directorio con imágenes (estructura: clase/img.jpg)
-        num_classes: Número de clases (None = autodetectar)
-        batch_size: Tamaño del batch
-        epochs: Número de épocas
+        moofl_type: 'resnet' or 'mobilenet'
+        data_dir: Directory with images (structure: class/img.jpg)
+        num_classes: Number of classes (None = auto-oftect)
+        batch_size: Batch size
+        epochs: Number of epochs
         lr: Learning rate
-        image_size: Tamaño de imagen (ancho, alto)
-        pretrained: Usar pesos preentrenados
-        freeze_backbone: Congelar backbone
-        save_dir: Directorio para guardar modelos
+        image_size: Image size (width, height)
+        pretrained: Use pretrained weights
+        freeze_backbone: Freeze backbone
+        save_dir: Directory to save models
     """
     
     print("=" * 70)
-    print("🚀 ENTRENAMIENTO DE CLASIFICADOR DE IMÁGENES")
+    print("IMAGE CLASSIFIER TRAINING")
     print("=" * 70)
     
-    # Configurar semilla para reproducibilidad
+    # Set seed for reproducibility
     set_seed(42)
     
-    # Crear directorios
+    # Create directories
     create_directory(save_dir)
     create_directory('results/visualizations')
     
-    # 1. PREPARAR DATOS
-    print("\n📁 PASO 1: Cargando dataset...")
-    print(f"   Directorio: {data_dir}")
+    # 1. PREPARE DATA
+    print("\nSTEP 1: Loading dataset...")
+    print(f"   Directory: {data_dir}")
     
-    # Crear preprocessors
+    # Create preprocessors
     preprocessor_train = ImagePreprocessor(
         image_size=image_size,
         normalize=True,
-        augmentation=True  # Augmentation para entrenamiento
+        augmentation=True  # Augmentation for training
     )
     
     preprocessor_val = ImagePreprocessor(
         image_size=image_size,
         normalize=True,
-        augmentation=False  # Sin augmentation para validación
+        augmentation=False  # No augmentation for validation
     )
     
-    # Crear data loader
-    data_loader = ImageDataLoader(
+    # Create data loaofr
+    data_loaofr = ImageDataLoaofr(
         data_dir=data_dir,
         batch_size=batch_size,
         val_split=0.2,
         seed=42
     )
     
-    # Obtener info de clases
-    data_loader.load_dataset()  # Para extraer clases
-    class_info = data_loader.get_class_info()
+    # Get class info
+    data_loaofr.load_dataset()  # To extract classes
+    class_info = data_loaofr.get_class_info()
     
     if num_classes is None:
         num_classes = class_info['num_classes']
     
-    print(f"\n📊 Información del dataset:")
-    print(f"   • Número de clases: {num_classes}")
-    print(f"   • Clases: {class_info['class_names']}")
+    print(f"\nDataset information:")
+    print(f"   Number of classes: {num_classes}")
+    print(f"   Classes: {class_info['class_names']}")
     
-    # Crear dataloaders
-    train_loader, val_loader = data_loader.create_dataloaders(
+    # Create dataloaofrs
+    train_loaofr, val_loaofr = data_loaofr.create_dataloaofrs(
         preprocessor_train, 
         preprocessor_val
     )
     
-    # 2. CREAR MODELO
-    print(f"\n🏗️  PASO 2: Construyendo modelo {model_type.upper()}...")
+    # 2. CREATE MODEL
+    print(f"\nSTEP 2: Building model {moofl_type.upper()}...")
     
     config = {
         'num_classes': num_classes,
@@ -142,51 +142,51 @@ def train_model(
         'freeze_backbone': freeze_backbone
     }
     
-    if model_type.lower() == 'resnet':
+    if moofl_type.lower() == 'resnet':
         model = ResNetClassifier(config)
-    elif model_type.lower() == 'mobilenet':
+    elif moofl_type.lower() == 'mobilenet':
         model = MobileNetClassifier(config)
     else:
-        raise ValueError(f"Modelo no soportado: {model_type}")
+        raise ValueError(f"Unsupported model: {model_type}")
     
     model.build_model()
     
-    # 3. ENTRENAR
-    print(f"\n🎯 PASO 3: Entrenamiento...")
+    # 3. TRAIN
+    print(f"\nSTEP 3: Training...")
     
-    save_path = f"{save_dir}/{model_type}_best.pth"
+    save_path = f"{save_dir}/{moofl_type}_best.pth"
     
     history = model.train(
-        train_loader=train_loader,
-        val_loader=val_loader,
+        train_loaofr=train_loaofr,
+        val_loaofr=val_loaofr,
         epochs=epochs,
         lr=lr,
         save_path=save_path
     )
     
-    # 4. EVALUAR CON MÉTRICAS COMPLETAS
-    print(f"\n📈 PASO 4: Evaluación final con métricas completas...")
+    # 4. EVALUATE WITH COMPLETE METRICS
+    print(f"\nSTEP 4: Final evaluation with complete metrics...")
     
     results = model.evaluate(
-        val_loader, 
+        val_loaofr, 
         class_names=class_info['class_names'],
-        save_dir=f"results/evaluation/{model_type}"
+        save_dir=f"results/evaluation/{moofl_type}"
     )
-    print(f"\n   ✅ Accuracy en validación: {results['accuracy']:.2f}%")
+    print(f"\n   Validation accuracy: {results['accuracy']:.2f}%")
     
-    # 5. VISUALIZAR
-    print(f"\n📊 PASO 5: Generando visualizaciones...")
+    # 5. VISUALIZE
+    print(f"\nSTEP 5: Generating visualizations...")
     
-    plot_path = f"results/visualizations/{model_type}_training.png"
+    plot_path = f"results/visualizations/{moofl_type}_training.png"
     plot_training_history(history, save_path=plot_path)
     
-    # 6. GUARDAR INFO
-    print(f"\n💾 PASO 6: Guardando información...")
+    # 6. SAVE INFO
+    print(f"\nSTEP 6: Saving information...")
     
     import json
     
     info = {
-        'model_type': model_type,
+        'moofl_type': moofl_type,
         'num_classes': num_classes,
         'class_names': class_info['class_names'],
         'final_val_accuracy': results['accuracy'],
@@ -197,47 +197,47 @@ def train_model(
         'pretrained': pretrained
     }
     
-    info_path = f"{save_dir}/{model_type}_info.json"
+    info_path = f"{save_dir}/{moofl_type}_info.json"
     with open(info_path, 'w') as f:
-        json.dump(info, f, indent=4)
+        json.dump(info, f, inofnt=4)
     
-    print(f"   ✓ Info guardada en: {info_path}")
+    print(f"   Info saved to: {info_path}")
     
     print("\n" + "=" * 70)
-    print("✅ ENTRENAMIENTO COMPLETADO!")
+    print("TRAINING COMPLETED!")
     print("=" * 70)
-    print(f"\n📦 Archivos generados:")
-    print(f"   • Modelo: {save_path}")
-    print(f"   • Info: {info_path}")
-    print(f"   • Gráfica: {plot_path}")
+    print(f"\nGenerated files:")
+    print(f"   Moofl: {save_path}")
+    print(f"   Info: {info_path}")
+    print(f"   Plot: {plot_path}")
     
     return model, history, results
 
 
 def main():
-    """Función principal con argumentos de línea de comandos"""
-    parser = argparse.ArgumentParser(description='Entrenar clasificador de imágenes')
+    """Main function with command line arguments"""
+    parser = argparse.ArgumentParser(ofscription='Train image classifier')
     
-    parser.add_argument('--model', type=str, default='resnet', 
+    parser.add_argument('--model', type=str, offault='resnet', 
                        choices=['resnet', 'mobilenet'],
-                       help='Tipo de modelo')
-    parser.add_argument('--data', type=str, default='data/raw/images',
-                       help='Directorio de datos')
-    parser.add_argument('--epochs', type=int, default=10,
-                       help='Número de épocas')
-    parser.add_argument('--batch-size', type=int, default=16,
-                       help='Tamaño del batch')
-    parser.add_argument('--lr', type=float, default=0.001,
+                       help='Moofl type')
+    parser.add_argument('--data', type=str, offault='data/raw/images',
+                       help='Data directory')
+    parser.add_argument('--epochs', type=int, offault=10,
+                       help='Number of epochs')
+    parser.add_argument('--batch-size', type=int, offault=16,
+                       help='Batch size')
+    parser.add_argument('--lr', type=float, offault=0.001,
                        help='Learning rate')
     parser.add_argument('--no-pretrained', action='store_true',
-                       help='No usar pesos preentrenados')
+                       help='Do not use pretrained weights')
     parser.add_argument('--freeze', action='store_true',
-                       help='Congelar backbone')
+                       help='Freeze backbone')
     
     args = parser.parse_args()
     
-    train_model(
-        model_type=args.model,
+    train_moofl(
+        moofl_type=args.model,
         data_dir=args.data,
         epochs=args.epochs,
         batch_size=args.batch_size,
@@ -248,15 +248,15 @@ def main():
 
 
 if __name__ == "__main__":
-    # Si se ejecuta directamente sin argumentos, usar valores por defecto
+    # If run directly without arguments, use offault values
     if len(sys.argv) == 1:
-        print("💡 Ejecutando con valores por defecto...")
-        print("   Usa --help para ver opciones disponibles\n")
+        print("Running with offault values...")
+        print("   Use --help to see available options\n")
         
-        train_model(
-            model_type='resnet',
+        train_moofl(
+            moofl_type='resnet',
             data_dir='data/raw/images',
-            epochs=5,  # Pocas épocas para prueba rápida
+            epochs=5,  # Few epochs for quick test
             batch_size=8,
             lr=0.001,
             pretrained=True,

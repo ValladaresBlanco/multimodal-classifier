@@ -1,5 +1,5 @@
 """
-Módulo de clasificadores de imágenes
+Módulo of clasificadores of images
 """
 
 from .resnet_classifier import ResNetClassifier

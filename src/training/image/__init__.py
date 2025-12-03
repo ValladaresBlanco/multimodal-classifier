@@ -1,3 +1,3 @@
 """
-Módulo de entrenamiento de imágenes
+Módulo of training of images
 """

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clasificador Multimodal - IA en Tiempo Real</title>
+    <title>Multimodal Classifier - Real-time AI</title>
     <style>
         * {
             margin: 0;
@@ -271,12 +271,12 @@
 <body>
     <div class="container">
         <header>
-            <h1>🤖 Clasificador Multimodal IA</h1>
-            <p class="subtitle">Clasificación de imágenes y videos en tiempo real con Deep Learning</p>
+            <h1>🤖 Multimodal AI Classifier</h1>
+            <p class="subtitle">Real-time image and video classification with Deep Learning</p>
         </header>
 
         <div class="status" id="status">
-            <span class="loading"></span> Conectando con el servidor...
+            <span class="loading"></span> Connecting to server...
         </div>
 
         <div class="model-selector">
@@ -285,25 +285,25 @@
         </div>
 
         <div class="main-content">
-            <!-- Subir Imagen -->
+            <!-- Upload Image -->
             <div class="card">
-                <h2><span class="icon">📸</span> Clasificar Imagen</h2>
+                <h2><span class="icon"></span> Classify Image</h2>
                 <div class="upload-area" id="imageUploadArea" onclick="document.getElementById('imageInput').click()">
-                    <p style="font-size: 3em; margin-bottom: 10px;">📁</p>
-                    <p style="color: #667eea; font-weight: bold;">Click o arrastra una imagen</p>
+                    <p style="font-size: 3em; margin-bottom: 10px;"></p>
+                    <p style="color: #667eea; font-weight: bold;">Click or drag an image</p>
                     <p style="color: #999; font-size: 0.9em; margin-top: 5px;">JPG, PNG, JPEG</p>
                 </div>
                 <input type="file" id="imageInput" accept="image/*" onchange="handleImageLoad(event)">
                 <img id="previewImage" class="hidden">
                 <div class="image-actions hidden" id="imageActions" style="margin-top: 15px; text-align: center;">
-                    <button class="btn" onclick="classifyImage()">🎯 Clasificar Imagen</button>
+                    <button class="btn" onclick="classifyImage()">Classify Image</button>
                 </div>
                 <div id="imageResult" class="hidden"></div>
             </div>
 
-            <!-- Webcam en Tiempo Real -->
+            <!-- Real-time Webcam -->
             <div class="card">
-                <h2><span class="icon">🎥</span> Webcam en Tiempo Real</h2>
+                <h2><span class="icon"></span> Real-time Webcam</h2>
                 <div class="video-container">
                     <video id="webcamVideo" class="hidden" autoplay playsinline></video>
                     <canvas id="webcamCanvas" class="hidden"></canvas>
@@ -311,9 +311,9 @@
                     <div id="fps" class="fps hidden">FPS: 0</div>
                 </div>
                 <div style="text-align: center; margin-top: 10px;">
-                    <button class="btn" id="webcamBtn" onclick="toggleWebcam()">Iniciar Webcam</button>
-                    <button class="btn hidden" id="captureBtn" onclick="capturePhoto()">📷 Capturar Foto</button>
-                    <button class="btn hidden" id="classifyCaptureBtn" onclick="classifyCapturedPhoto()">🎯 Clasificar Captura</button>
+                    <button class="btn" id="webcamBtn" onclick="toggleWebcam()">Start Webcam</button>
+                    <button class="btn hidden" id="captureBtn" onclick="capturePhoto()"> Capture Photo</button>
+                    <button class="btn hidden" id="classifyCaptureBtn" onclick="classifyCapturedPhoto()"> Classify Capture</button>
                 </div>
                 <img id="capturedImage" class="hidden">
                 <div id="webcamResult" class="hidden"></div>
@@ -329,23 +329,23 @@
         let lastFrameTime = Date.now();
         let frameCount = 0;
 
-        // Verificar estado del servidor
+        // Verify server status
         async function checkServerStatus() {
             try {
                 const response = await fetch(`${API_URL}/api/health`);
                 const data = await response.json();
                 document.getElementById('status').innerHTML = `
-                    ✅ Servidor conectado | Modelo: <strong>${data.model_type}</strong> | Clases: ${data.classes.length}
+                     Server connected | Model: <strong>${data.model_type}</strong> | Classes: ${data.classes.length}
                 `;
             } catch (error) {
-                document.getElementById('status').innerHTML = '❌ Error de conexión con el servidor';
+                document.getElementById('status').innerHTML = ' Connection error with server';
             }
         }
 
-        // Cambiar modelo
+        // Switch model
         async function switchModel(modelType, buttonElement) {
             try {
-                // Mostrar que está cargando
+                // Show loading
                 buttonElement.innerHTML = '<span class="loading"></span>';
                 buttonElement.disabled = true;
                 
@@ -355,43 +355,43 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    // Actualizar visualmente todos los botones
+                    // Update all buttons visually
                     document.querySelectorAll('.model-btn').forEach(btn => {
                         btn.classList.remove('active');
                         btn.disabled = false;
                     });
                     buttonElement.classList.add('active');
                     
-                    // Restaurar texto del botón
+                    // Restore button text
                     if (modelType === 'resnet') {
                         buttonElement.innerHTML = 'ResNet50';
                     } else {
                         buttonElement.innerHTML = 'MobileNetV2';
                     }
                     
-                    // Actualizar estado
+                    // Update status
                     await checkServerStatus();
                     
-                    // Mostrar notificación
+                    // Show notification
                     const status = document.getElementById('status');
                     status.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
                     status.style.color = 'white';
-                    status.innerHTML = `✅ Modelo cambiado a <strong>${modelType === 'resnet' ? 'ResNet50' : 'MobileNetV2'}</strong>`;
+                    status.innerHTML = ` Model changed to <strong>${modelType === 'resnet' ? 'ResNet50' : 'MobileNetV2'}</strong>`;
                     
-                    // Volver al estilo normal después de 3 segundos
+                    // Return to normal style after 3 seconds
                     setTimeout(() => {
                         status.style.background = 'rgba(255,255,255,0.9)';
                         status.style.color = 'inherit';
                         checkServerStatus();
                     }, 3000);
                 } else {
-                    throw new Error(data.error || 'Error al cambiar modelo');
+                    throw new Error(data.error || 'Error changing model');
                 }
             } catch (error) {
-                console.error('Error al cambiar modelo:', error);
-                alert('Error al cambiar modelo: ' + error.message);
+                console.error('Error changing model:', error);
+                alert('Error changing model: ' + error.message);
                 
-                // Restaurar botón en caso de error
+                // Restore button in case of error
                 if (modelType === 'resnet') {
                     buttonElement.innerHTML = 'ResNet50';
                 } else {
@@ -401,39 +401,39 @@
             }
         }
 
-        // Variables globales para la imagen cargada
+        // Global variables for loaded image
         let currentImageFile = null;
         let capturedPhotoBlob = null;
 
-        // Cargar imagen (sin clasificar automáticamente)
+        // Load image (without classifying automatically)
         function handleImageLoad(event) {
             const file = event.target.files[0];
             if (!file) return;
 
             currentImageFile = file;
 
-            // Previsualizar
+            // Preview
             const preview = document.getElementById('previewImage');
             preview.src = URL.createObjectURL(file);
             preview.classList.remove('hidden');
 
-            // Mostrar botón de clasificar
+            // Show classify button
             document.getElementById('imageActions').classList.remove('hidden');
             document.getElementById('imageResult').classList.add('hidden');
         }
 
-        // Clasificar imagen cargada
+        // Classify loaded image
         async function classifyImage() {
             if (!currentImageFile) {
-                alert('Por favor carga una imagen primero');
+                alert('Please load an image first');
                 return;
             }
 
-            // Mostrar loading
-            document.getElementById('imageResult').innerHTML = '<div class="loading"></div> Clasificando...';
+            // Show loading
+            document.getElementById('imageResult').innerHTML = '<div class="loading"></div> Classifying...';
             document.getElementById('imageResult').classList.remove('hidden');
 
-            // Subir y predecir
+            // Upload and predict
             const formData = new FormData();
             formData.append('file', currentImageFile);
 
@@ -447,19 +447,19 @@
                 if (data.success) {
                     showResult('imageResult', data);
                 } else {
-                    throw new Error(data.error || 'Error al clasificar');
+                    throw new Error(data.error || 'Error classifying');
                 }
             } catch (error) {
                 console.error('Error:', error);
                 document.getElementById('imageResult').innerHTML = `
                     <div style="background: #ff4444; color: white; padding: 15px; border-radius: 10px;">
-                        ❌ Error: ${error.message}
+                         Error: ${error.message}
                     </div>
                 `;
             }
         }
 
-        // Capturar foto de la webcam
+        // Capture photo from webcam
         function capturePhoto() {
             const video = document.getElementById('webcamVideo');
             const canvas = document.getElementById('capturedCanvas');
@@ -469,33 +469,33 @@
             canvas.height = video.videoHeight;
             ctx.drawImage(video, 0, 0);
 
-            // Convertir a imagen
+            // Convert to image
             canvas.toBlob((blob) => {
                 capturedPhotoBlob = blob;
                 
-                // Mostrar preview
+                // Show preview
                 const capturedImg = document.getElementById('capturedImage');
                 capturedImg.src = URL.createObjectURL(blob);
                 capturedImg.classList.remove('hidden');
 
-                // Mostrar botón de clasificar
+                // Show classify button
                 document.getElementById('classifyCaptureBtn').classList.remove('hidden');
                 document.getElementById('webcamResult').classList.add('hidden');
             }, 'image/jpeg', 0.95);
         }
 
-        // Clasificar foto capturada
+        // Classify captured photo
         async function classifyCapturedPhoto() {
             if (!capturedPhotoBlob) {
-                alert('Por favor captura una foto primero');
+                alert('Please capture a photo first');
                 return;
             }
 
-            // Mostrar loading
-            document.getElementById('webcamResult').innerHTML = '<div class="loading"></div> Clasificando...';
+            // Show loading
+            document.getElementById('webcamResult').innerHTML = '<div class="loading"></div> Classifying...';
             document.getElementById('webcamResult').classList.remove('hidden');
 
-            // Subir y predecir
+            // Upload and predict
             const formData = new FormData();
             formData.append('file', capturedPhotoBlob, 'captured.jpg');
 
@@ -509,19 +509,19 @@
                 if (data.success) {
                     showResult('webcamResult', data);
                 } else {
-                    throw new Error(data.error || 'Error al clasificar');
+                    throw new Error(data.error || 'Error classifying');
                 }
             } catch (error) {
                 console.error('Error:', error);
                 document.getElementById('webcamResult').innerHTML = `
                     <div style="background: #ff4444; color: white; padding: 15px; border-radius: 10px;">
-                        ❌ Error: ${error.message}
+                         Error: ${error.message}
                     </div>
                 `;
             }
         }
 
-        // Iniciar/detener webcam
+        // Start/stop webcam
         async function toggleWebcam() {
             if (isWebcamActive) {
                 stopWebcam();
@@ -536,19 +536,19 @@
                 const video = document.getElementById('webcamVideo');
                 video.srcObject = webcamStream;
                 video.classList.remove('hidden');
-                document.getElementById('webcamBtn').textContent = 'Detener Webcam';
+                document.getElementById('webcamBtn').textContent = 'Stop Webcam';
                 document.getElementById('captureBtn').classList.remove('hidden');
                 isWebcamActive = true;
 
-                // Limpiar captura previa
+                // Clear previous capture
                 document.getElementById('capturedImage').classList.add('hidden');
                 document.getElementById('classifyCaptureBtn').classList.add('hidden');
                 document.getElementById('webcamResult').classList.add('hidden');
                 capturedPhotoBlob = null;
 
             } catch (error) {
-                console.error('Error al acceder a la webcam:', error);
-                alert('No se pudo acceder a la webcam');
+                console.error('Error accessing webcam:', error);
+                alert('Could not access webcam');
             }
         }
 
@@ -561,17 +561,17 @@
             }
             document.getElementById('webcamVideo').classList.add('hidden');
             document.getElementById('captureBtn').classList.add('hidden');
-            document.getElementById('webcamBtn').textContent = 'Iniciar Webcam';
+            document.getElementById('webcamBtn').textContent = 'Start Webcam';
             isWebcamActive = false;
         }
 
-        // Mostrar resultados
+        // Show results
         function showResult(elementId, data) {
             const element = document.getElementById(elementId);
             
             let top3HTML = '';
             if (data.top3_predictions) {
-                top3HTML = '<div class="top3"><strong>Top 3 Predicciones:</strong>';
+                top3HTML = '<div class="top3"><strong>Top 3 Predictions:</strong>';
                 data.top3_predictions.forEach(pred => {
                     top3HTML += `
                         <div class="top3-item">
@@ -588,15 +588,15 @@
 
             element.innerHTML = `
                 <div class="result-box">
-                    <div class="result-main">🎯 ${data.predicted_class}</div>
-                    <div class="confidence">Confianza: ${data.confidence.toFixed(1)}%</div>
+                    <div class="result-main"> ${data.predicted_class}</div>
+                    <div class="confidence">Confidence: ${data.confidence.toFixed(1)}%</div>
                     ${top3HTML}
                 </div>
             `;
             element.classList.remove('hidden');
         }
 
-        // Drag and drop para imágenes
+        // Drag and drop for images
         const imageUploadArea = document.getElementById('imageUploadArea');
         imageUploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
@@ -611,13 +611,13 @@
             const file = e.dataTransfer.files[0];
             if (file && file.type.startsWith('image/')) {
                 document.getElementById('imageInput').files = e.dataTransfer.files;
-                handleImageUpload({ target: { files: [file] } });
+                handleImageLoad({ target: { files: [file] } });
             }
         });
 
-        // Inicializar
+        // Initialize
         checkServerStatus();
-        setInterval(checkServerStatus, 10000); // Actualizar cada 10s
+        setInterval(checkServerStatus, 10000); // Update every 10s
     </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 """
-Módulo de cargadores de datos
+Módulo of loaofdres of data
 """
 
-from .image_loader import ImageDataLoader, ImageDataset
+from .image_loaofr import ImageDataLoaofr, ImageDataset
 
-__all__ = ['ImageDataLoader', 'ImageDataset']
+__all__ = ['ImageDataLoaofr', 'ImageDataset']

@@ -1,5 +1,5 @@
 """
-Módulo de aplicación en tiempo real
+Módulo of aplicación en tiempo real
 """
 
 from .webcam_classifier import WebcamClassifier

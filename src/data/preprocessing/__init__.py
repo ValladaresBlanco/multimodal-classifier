@@ -1,5 +1,5 @@
 """
-Módulo de preprocesamiento de datos
+Módulo of preprocesamiento of data
 """
 
 from .image_preprocessor import ImagePreprocessor

@@ -39,12 +39,12 @@ env/
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# Dataset - Imágenes para entrenamiento
+# Dataset - Training images and audios
 data/raw/images/
 data/raw/audios/
 data/processed/
 
-# Archivos temporales
+# Temporary files
 *.log
 *.tmp
 *.cache
@@ -54,7 +54,7 @@ data/processed/
 Thumbs.db
 desktop.ini
 
-# Archivos de configuración local
+# Local configuration files
 *.env
 .env.local
 config/local.yaml
