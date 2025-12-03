@@ -39,10 +39,10 @@ env/
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# Dataset - Training images and audios
-data/raw/images/
-data/raw/audios/
-data/processed/
+# Dataset - Training images and audios (commented to allow image uploads)
+# data/raw/images/
+# data/raw/audios/
+# data/processed/
 
 # Temporary files
 *.log
