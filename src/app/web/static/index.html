@@ -1,64 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Multimodal Classifier - Real-time AI</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1>Multimodal AI Classifier</h1>
-            <p class="subtitle">Real-time image and video classification with Deep Learning</p>
-        </header>
+      <header>
+        <h1>Multimodal AI Classifier</h1>
+        <p class="subtitle">
+          Real-time image and video classification with Deep Learning
+        </p>
+      </header>
 
-        <div class="status" id="status">
-            <span class="loading"></span> Connecting to server...
+      <div class="status" id="status">
+        <span class="loading"></span> Connecting to server...
+      </div>
+
+      <div class="model-selector">
+        <button class="model-btn active" onclick="switchModel('resnet', this)">
+          ResNet50
+        </button>
+        <button class="model-btn" onclick="switchModel('mobilenet', this)">
+          MobileNetV2
+        </button>
+      </div>
+
+      <div class="main-content">
+        <!-- Upload Image -->
+        <div class="card">
+          <h2><span class="icon"></span> Classify Image</h2>
+          <div
+            class="upload-area"
+            id="imageUploadArea"
+            onclick="document.getElementById('imageInput').click()"
+          >
+            <p style="font-size: 3em; margin-bottom: 10px"></p>
+            <p style="color: #667eea; font-weight: bold">
+              Click or drag an image
+            </p>
+            <p style="color: #999; font-size: 0.9em; margin-top: 5px">
+              JPG, PNG, JPEG
+            </p>
+          </div>
+          <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
+            onchange="handleImageLoad(event)"
+          />
+          <img id="previewImage" class="hidden" />
+          <div class="image-actions hidden" id="imageActions">
+            <button class="btn" onclick="classifyImage()">
+              Classify Image
+            </button>
+          </div>
+          <div id="imageResult" class="hidden"></div>
         </div>
 
-        <div class="model-selector">
-            <button class="model-btn active" onclick="switchModel('resnet', this)">ResNet50</button>
-            <button class="model-btn" onclick="switchModel('mobilenet', this)">MobileNetV2</button>
+        <!-- Real-time Webcam -->
+        <div class="card">
+          <h2><span class="icon"></span> Real-time Webcam</h2>
+          <div class="video-container">
+            <video id="webcamVideo" class="hidden" autoplay playsinline></video>
+            <canvas id="webcamCanvas" class="hidden"></canvas>
+            <canvas id="capturedCanvas" class="hidden"></canvas>
+            <div id="fps" class="fps hidden">FPS: 0</div>
+          </div>
+          <div style="text-align: center; margin-top: 10px">
+            <button class="btn" id="webcamBtn" onclick="toggleWebcam()">
+              Start Webcam
+            </button>
+            <button class="btn hidden" id="captureBtn" onclick="capturePhoto()">
+              Capture Photo
+            </button>
+            <button
+              class="btn hidden"
+              id="classifyCaptureBtn"
+              onclick="classifyCapturedPhoto()"
+            >
+              Classify Capture
+            </button>
+          </div>
+          <img id="capturedImage" class="hidden" />
+          <div id="webcamResult" class="hidden"></div>
         </div>
+      </div>
 
-        <div class="main-content">
-            <!-- Upload Image -->
-            <div class="card">
-                <h2><span class="icon"></span> Classify Image</h2>
-                <div class="upload-area" id="imageUploadArea" onclick="document.getElementById('imageInput').click()">
-                    <p style="font-size: 3em; margin-bottom: 10px;"></p>
-                    <p style="color: #667eea; font-weight: bold;">Click or drag an image</p>
-                    <p style="color: #999; font-size: 0.9em; margin-top: 5px;">JPG, PNG, JPEG</p>
-                </div>
-                <input type="file" id="imageInput" accept="image/*" onchange="handleImageLoad(event)">
-                <img id="previewImage" class="hidden">
-                <div class="image-actions hidden" id="imageActions">
-                    <button class="btn" onclick="classifyImage()">Classify Image</button>
-                </div>
-                <div id="imageResult" class="hidden"></div>
+      <!-- Audio Section -->
+      <div class="audio-section">
+        <h2 class="section-title">Audio Transcription</h2>
+
+        <div class="audio-grid">
+          <!-- Record & Transcribe Audio -->
+          <div class="card audio-card">
+            <h3><span class="icon"></span> Record & Transcribe</h3>
+            <div class="audio-visualizer" id="audioVisualizer">
+              <div class="visualizer-bars">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+              <p class="audio-status" id="audioStatus">Ready to record</p>
             </div>
 
-            <!-- Real-time Webcam -->
-            <div class="card">
-                <h2><span class="icon"></span> Real-time Webcam</h2>
-                <div class="video-container">
-                    <video id="webcamVideo" class="hidden" autoplay playsinline></video>
-                    <canvas id="webcamCanvas" class="hidden"></canvas>
-                    <canvas id="capturedCanvas" class="hidden"></canvas>
-                    <div id="fps" class="fps hidden">FPS: 0</div>
-                </div>
-                <div style="text-align: center; margin-top: 10px;">
-                    <button class="btn" id="webcamBtn" onclick="toggleWebcam()">Start Webcam</button>
-                    <button class="btn hidden" id="captureBtn" onclick="capturePhoto()">Capture Photo</button>
-                    <button class="btn hidden" id="classifyCaptureBtn" onclick="classifyCapturedPhoto()">Classify Capture</button>
-                </div>
-                <img id="capturedImage" class="hidden">
-                <div id="webcamResult" class="hidden"></div>
+            <div class="audio-controls">
+              <button
+                class="btn btn-record"
+                id="recordBtn"
+                onclick="toggleRecording()"
+              >
+                <span class="icon"></span> Start Recording
+              </button>
+              <button
+                class="btn btn-secondary hidden"
+                id="transcribeBtn"
+                onclick="transcribeAudio()"
+              >
+                <span class="icon"></span> Transcribe Audio
+              </button>
             </div>
+
+            <div class="recording-info hidden" id="recordingInfo">
+              <p>
+                <strong>Duration:</strong>
+                <span id="recordingDuration">0:00</span>
+              </p>
+              <audio id="audioPlayback" controls class="audio-player"></audio>
+            </div>
+
+            <div id="transcriptionResult" class="hidden"></div>
+          </div>
+
+          <!-- Metadata Recording (collapsed by default) -->
+          <div class="card audio-card">
+            <h3><span class="icon"></span> Training Data Collection</h3>
+            <button
+              class="btn btn-secondary btn-sm"
+              onclick="toggleMetadataSection()"
+            >
+              <span id="metadataToggleIcon">▶</span> Show Advanced
+            </button>
+
+            <div class="metadata-section hidden" id="metadataSection">
+              <p class="info-text">
+                Record audio samples with known transcriptions for training
+              </p>
+
+              <div class="form-group">
+                <label for="metadataText">Expected Transcription:</label>
+                <textarea
+                  id="metadataText"
+                  class="text-input"
+                  rows="3"
+                  placeholder="Enter the text that will be spoken..."
+                ></textarea>
+              </div>
+
+              <div class="audio-visualizer-small" id="metadataVisualizer">
+                <div class="visualizer-bars-small">
+                  <div class="bar-small"></div>
+                  <div class="bar-small"></div>
+                  <div class="bar-small"></div>
+                  <div class="bar-small"></div>
+                  <div class="bar-small"></div>
+                </div>
+                <p class="audio-status-small" id="metadataStatus">Ready</p>
+              </div>
+
+              <div class="audio-controls">
+                <button
+                  class="btn btn-record"
+                  id="metadataRecordBtn"
+                  onclick="toggleMetadataRecording()"
+                >
+                  <span class="icon">⏺</span> Record Training Sample
+                </button>
+              </div>
+
+              <div class="recording-info hidden" id="metadataRecordingInfo">
+                <p>
+                  <strong>Duration:</strong>
+                  <span id="metadataDuration">0:00</span>
+                </p>
+                <audio
+                  id="metadataPlayback"
+                  controls
+                  class="audio-player"
+                ></audio>
+                <button
+                  class="btn btn-success"
+                  onclick="saveMetadataRecording()"
+                >
+                  <span class="icon">💾</span> Save Training Sample
+                </button>
+              </div>
+
+              <div id="metadataSaveResult" class="hidden"></div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <script src="/static/js/app.js"></script>
-</body>
+  </body>
 </html>

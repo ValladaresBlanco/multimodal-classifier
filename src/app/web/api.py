@@ -3,7 +3,7 @@ FastAPI Backend for Multimodal Classification
 Endpoints for images, viofo and real-time webcam
 """
 
-from fastapi import FastAPI, File, UploadFile, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, File, UploadFile, WebSocket, WebSocketDisconnect, Form
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -16,6 +16,8 @@ import io
 import json
 import base64
 import sys
+import tempfile
+import os
 
 # Add src to path
 sys.path.append(str(Path(__file__).parent.parent.parent.parent))
@@ -23,6 +25,10 @@ sys.path.append(str(Path(__file__).parent.parent.parent.parent))
 from src.models.image_classifier.resnet_classifier import ResNetClassifier
 from src.models.image_classifier.mobilenet_classifier import MobileNetClassifier
 from src.data.preprocessing.image_preprocessor import ImagePreprocessor
+from transformers import pipeline
+import time
+import csv
+from src.utils import create_directory
 
 # Initialize FastAPI
 app = FastAPI(
@@ -49,6 +55,7 @@ MODEL = None
 PREPROCESSOR = None
 CLASS_NAMES = []
 MODEL_TYPE = "resnet"
+TRANSCRIBER = None
 
 
 def load_model(model_type: str = "resnet"):
@@ -93,6 +100,15 @@ def load_model(model_type: str = "resnet"):
     
     print(f"Model {model_type} loaded successfully")
     print(f"   Classes: {CLASS_NAMES}")
+
+
+def load_transcriber():
+    """Load the speech recognition model"""
+    global TRANSCRIBER
+    if TRANSCRIBER is None:
+        print("Loading speech recognition model...")
+        TRANSCRIBER = pipeline('automatic-speech-recognition', model='models/saved/mi_modelo_stt/mi_modelo_stt/')
+        print("Speech recognition model loaded successfully")
 
 
 def predict_image(image: np.ndarray) -> dict:
@@ -248,6 +264,101 @@ async def switch_model(model_type: str):
             "model": model_type,
             "classes": CLASS_NAMES
         })
+    except Exception as e:
+        return JSONResponse(
+            status_code=500,
+            content={"success": False, "error": str(e)}
+        )
+
+
+@app.post("/api/audio/transcribe")
+async def transcribe_audio(file: UploadFile = File(...)):
+    """
+    Transcribe uploaded audio file
+    """
+    try:
+        load_transcriber()
+        
+        # Save uploaded file temporarily
+        with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as tmp:
+            content = await file.read()
+            tmp.write(content)
+            tmp_path = tmp.name
+        
+        try:
+            # Transcribe
+            result = TRANSCRIBER(tmp_path)
+            transcription = result['text']
+            
+            return JSONResponse(content={
+                "success": True,
+                "transcription": transcription
+            })
+        finally:
+            # Clean up temp file
+            os.unlink(tmp_path)
+            
+    except Exception as e:
+        return JSONResponse(
+            status_code=500,
+            content={"success": False, "error": str(e)}
+        )
+
+
+@app.post("/api/audio/save-training-sample")
+async def save_training_sample(
+    file: UploadFile = File(...),
+    text: str = Form(...),
+    duration: float = Form(...),
+    split: str = Form(...)
+):
+    """
+    Save training sample with transcription
+    """
+    try:
+        
+        # Validate split
+        if split not in ['train', 'val', 'test']:
+            split = 'train'
+        
+        # Create directories
+        audio_root = Path("data/raw/audio")
+        target_dir = create_directory(audio_root / split)
+        metadata_csv = audio_root / "metadata.csv"
+        
+        # Ensure metadata.csv exists
+        if not metadata_csv.exists():
+            with metadata_csv.open("w", newline="", encoding="utf-8") as fp:
+                writer = csv.DictWriter(fp, fieldnames=["path", "text", "split"])
+                writer.writeheader()
+        
+        # Generate unique filename
+        file_name = f"sample_{int(time.time() * 1000)}.wav"
+        file_path = target_dir / file_name
+        
+        # Save audio file
+        content = await file.read()
+        with file_path.open("wb") as f:
+            f.write(content)
+        
+        # Add to metadata
+        rel_path = file_path.relative_to(audio_root)
+        with metadata_csv.open("r+", newline="", encoding="utf-8") as fp:
+            content = fp.read()
+            if content and not content.endswith('\n'):
+                fp.seek(0, 2)
+                fp.write('\n')
+            writer = csv.DictWriter(fp, fieldnames=["path", "text", "split"])
+            writer.writerow({"path": str(rel_path), "text": text, "split": split})
+        
+        return JSONResponse(content={
+            "success": True,
+            "file_path": str(rel_path),
+            "transcription": text,
+            "duration": duration,
+            "split": split
+        })
+        
     except Exception as e:
         return JSONResponse(
             status_code=500,

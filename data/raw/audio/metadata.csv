@@ -1,0 +1,149 @@
+path,text,split
+train\sample_1764699014413.wav,hola,train
+train\sample_1764699506158.wav,me llamo juan,train
+train\sample_1764699672320.wav,"Mientras preparaba el café esta mañana, recordé que debo revisar los apuntes del proyecto y enviar un reporte con las ideas que surgieron en la última reunión con el equipo.",train
+train\sample_1764699815096.wav,"El fin de semana pasado caminé por el parque, observé a la gente tomando fotos y pensé que sería buena idea retomar mi pasatiempo de escribir historias cortas por las noches.",train
+train\sample_1764699871020.wav,"Para organizarme mejor, guardo notas en el celular, hago una lista de tareas y al final del día reviso qué logré completar y qué pendientes debo mover al día siguiente.",train
+train\sample_1764699933847.wav,"Me gustaría emprender un viaje en tren donde pueda leer, escuchar música tranquila y conversar con personas desconocidas que tengan historias interesantes para compartir.",train
+train\sample_1764699991442.wav,"Cada vez que llueve me gusta escuchar el sonido del agua, preparar algo caliente y aprovechar para ordenar mi espacio de trabajo o actualizar mis metas personales.",train
+train\sample_1764700026740.wav,"Estoy aprendiendo a cocinar platos nuevos, así que combino recetas tradicionales con ingredientes frescos y anoto todos los pasos para no olvidar los detalles importantes.",train
+train\sample_1764700083982.wav,"Cuando salgo a correr llevo audífonos, pongo un podcast motivador y me concentro en mantener una respiración constante para terminar el recorrido con buena energía.",train
+train\sample_1764700118077.wav,"Al final del día, me gusta escribir tres cosas que agradezco, revisar qué aprendí y planear un pequeño reto para mantenerme motivado y en constante crecimiento.",train
+train\sample_1764700361491.wav,"En las tardes suelo practicar algo de meditación, revisar mensajes pendientes y definir qué actividades quiero hacer para entretenerme sin descuidar mis.",train
+train\sample_1764700399458.wav,"Estoy organizando mis archivos digitales por carpetas, etiquetando las fotos del último viaje y limpiando documentos viejos para dejar solo lo que realmente.",train
+train\sample_1764715443409.wav,"Esta mañana desperté un poco antes de lo habitual, abrí las ventanas para dejar entrar la luz y preparé un café mientras escuchaba las noticias, intentando recordar todo lo que debía hacer durante el día.",train
+train\sample_1764715508026.wav,"Cuando camino rumbo al trabajo me gusta observar la ciudad despertando, ver cómo abren las tiendas, cómo saludan los vecinos, y anotar en mi mente pequeños detalles que luego puedo usar en mis relatos.",train
+train\sample_1764715624006.wav,"A veces, cuando el clima lo permite, saco la bicicleta del garaje, doy un paseo largo y aprovecho para ordenar mis ideas, pensando en proyectos que todavía no empiezo pero que me entusiasman muchísimo.",train
+train\sample_1764715694095.wav,"Mientras cocinaba pasta para la cena, recordé que tenía que llamar a mi familia, así que puse manos libres, charlamos sobre nuestros planes y al final terminamos riendo a carcajadas.",train
+train\sample_1764715739392.wav,"Dedico unos minutos cada noche a escribir tres cosas que agradezco, revisar lo que aprendí y proponerme un reto para el día siguiente, como leer un capítulo de un libro o practicar un nuevo hobby.",train
+train\sample_1764715782917.wav,"Cuando llueve fuerte me encanta quedarme cerca de la ventana con una taza de chocolate caliente, escuchar el sonido de las gotas y aprovechar para ordenar documentos que tenía olvidados en el escritorio.",train
+train\sample_1764715821542.wav,"En mi lista de metas de este año está aprender a tocar un instrumento, así que busqué clases en línea, descargué acordes sencillos y practicó un poco cada fin de semana para no perder el ritmo.",train
+train\sample_1764715873624.wav,"Me doy cuenta de que, cuando organizo mis conversaciones con notas de voz, logro recordar cada pendiente con mayor claridad, así que intento actualizar mis listas todas las noches antes de dormir.",train
+train\sample_1764715942395.wav,"Para no olvidar mis ideas creativas, llevo una libreta pequeña en el bolso, donde escribo frases, dibujos o palabras sueltas que más tarde pueden convertirse en un cuento o en una canción.",train
+train\sample_1764715982476.wav,"Disfruto mucho preparar una mesa bonita aunque esté comiendo solo; coloco flores, elijo cubiertos especiales y pongo música tranquila, porque esos detalles me hacen sentir cuidado.",train
+train\sample_1764716030787.wav,"Cada vez que visito una librería, termino comprando más libros de los que tenía planeado; sé que la pila crece, pero me motiva saber que siempre habrá historias nuevas esperándome.",train
+train\sample_1764716070364.wav,"Cuando necesito despejar mi mente, salgo a caminar sin destino definido, respiro profundo y observo cómo cambia la luz sobre los edificios o cómo los árboles se mecen con el viento.",train
+train\sample_1764716398352.wav,"Me gusta ver documentales de temas curiosos y tomar notas, porque luego esos datos me inspiran conversaciones interesantes con amigos y, a veces, despiertan nuevas metas personales.",train
+train\sample_1764716442573.wav,"Para comenzar el día con energía, preparo mi batido favorito con frutas, proteína y un poco de avena, y mientras lo bebo reviso mis correos para planear todo con calma.",train
+train\sample_1764716619456.wav,No basé mi carrera en tener hits. Tengo hits porque yo senté las base'. Ya no tengo nada más que decir. Para decirlo hace falta mucha clase. Mi piquete duro te marea'. Hasta tu mamá lo tararea. Qué más da que me tire' la mala. Si Haraca me tira la buena,train
+train\sample_1764716829411.wav,María. Juana. Carmen. Ana. Laura. Patricia. Daniela. Sofía. Andrea. Valeria. Gabriela. Fernanda. Claudia. Lucía. Isabel. José. Juan. Luis. Carlos. Jorge. Miguel. Antonio. Francisco. Alejandro,train
+train\sample_1764717111441.wav,"Los domingos por la tarde enciendo una vela aromática, pongo un álbum completo y dedico una hora a revisar fotos antiguas para recordar buenos momentos y reorganizar mis archivos digitales.",train
+train\sample_1764717177673.wav,"Estoy redescubriendo el hábito de escribir cartas a mano, así que compro papeles bonitos, sello los sobres y los llevo al buzón; siento que es una manera especial de conectar con personas queridas.",train
+train\sample_1764717237516.wav,"Para no distraerme durante las reuniones virtuales, cierro las pestañas innecesarias, tomo notas a mano y, al terminar, envío un resumen a los compañeros para que todos estemos alineados.",train
+train\sample_1764717302328.wav,"Me encanta experimentar con la decoración de mi sala, cambiando los cuadros de lugar, combinando cojines y buscando plantas que se adapten a la iluminación del espacio.",train
+train\sample_1764717413231.wav,"Cuando necesito motivación extra, leo biografías de personas que admiro, subrayo frases que me impactan y las pego en mi pared para recordarme que los objetivos se alcanzan paso a paso.",train
+train\sample_1764717465692.wav,"En las noches de insomnio prefiero preparar una infusión caliente, apagar las pantallas y repasar mentalmente algo que aprendí recientemente, como si se tratara de una historia que me cuento a mí mismo.",train
+train\sample_1764717512831.wav,"Siempre que viajo busco mercados locales para probar sabores nuevos, conversar con vendedores y traer algún ingrediente que luego pueda incorporar en mis recetas caseras.",train
+train\sample_1764717622038.wav,La galaxia entera cabe en una gota de saliva. Una gota de saliva ocupa la Quinta Avenida. La Quinta Avenida cabe en un piercing. Y un piercing ocupa una pirámide. Y una pirámide cabe en un vaso de leche. Y un vaso de leche ocupa un ejército. Y un ejército cabe metí'o en una pelota de golf. Una pelota de golf ocupa el Titanic,train
+train\sample_1764717724352.wav,"Y un ejército cabe metí'o en una pelota de golf. Una pelota de golf ocupa el Titanic. El Titanic cabe en un pintalabios. Un pintalabios ocupa el cielo. El cielo, la espina. Una espina ocupa un continente",train
+train\sample_1764717855434.wav,"Siempre que viajo busco mercados locales para probar sabores nuevos, conversar con vendedores y traer algún ingrediente que luego pueda incorporar en mis recetas caseras.",train
+train\sample_1764717892254.wav,"Para entrenar mi memoria, juego con aplicaciones de acertijos, hago sopas de letras y, cuando tengo tiempo, armo rompecabezas gigantes que ocupo en la mesa del comedor por varios días.",train
+train\sample_1764717932203.wav,"Me gusta organizar pequeñas reuniones en casa, preparar una lista de reproducción personalizada y ofrecer platillos sencillos; creo que compartir la mesa crea conexiones muy especiales.",train
+train\sample_1764717967634.wav,"Cada mes reviso mis finanzas, ajusto el presupuesto y reservo un porcentaje para objetivos futuros, como viajes, cursos o mejoras en mi espacio de trabajo.",train
+train\sample_1764718003810.wav,"Cuando ayudo a alguien a resolver un problema, intento escuchar con atención, resumir lo que me dicen y ofrecer ejemplos prácticos, porque así la conversación se vuelve más útil y empática.",train
+train\sample_1764718043386.wav,"Mantener mi escritorio ordenado es un reto constante, así que establecí una regla: antes de terminar la jornada debo guardar cables, limpiar la taza y dejar listo el siguiente bloque de tareas.",train
+train\sample_1764718084547.wav,"En los días nublados me gusta cocinar guisos que toman tiempo, dejar que los aromas llenen la casa y aprovechar ese rato para escuchar audiolibros o charlas inspiradoras.",train
+train\sample_1764718121354.wav,"Estoy aprendiendo a reconocer cuándo necesito descanso, así que no dudo en tomar una pausa corta, hacer respiraciones profundas y volver a mis actividades con la mente más despejada.",train
+train\sample_1764718167433.wav,"Cada vez que organizo mis fotos digitales, creo copias de seguridad en la nube y en un disco externo para no perder recuerdos valiosos; es una tarea larga, pero me da mucha tranquilidad.",train
+train\sample_1764718203544.wav,"Intento practicar idiomas escuchando podcasts, repitiendo frases clave y buscando oportunidades para conversar con personas nativas en plataformas de intercambio cultural.",train
+train\sample_1764718240535.wav,"Me propuse visitar más museos de la ciudad, documentar las obras que me gustan y escribir breves comentarios sobre lo que me transmiten, como si fuera un diario artístico.",train
+train\sample_1764718277463.wav,"Para mejorar mi postura durante el trabajo remoto, ajusté la altura de la silla, coloqué la pantalla a la altura de los ojos y hago estiramientos ligeros cada cuarenta minutos.",train
+train\sample_1764718375542.wav,"Cuando puedo, saco tiempo para visitar a mis abuelos, escuchar sus historias y ayudarlos con pequeñas tareas tecnológicas, como configurar sus teléfonos o enseñarles a hacer videollamadas.",train
+train\sample_1764718412465.wav,"Algo que me hace feliz es preparar regalos personalizados, ya sea un playlist, una carta o un frasco con galletas hechas en casa, porque siento que reflejan dedicación y cariño.",train
+train\sample_1764718466560.wav,"Estoy organizando un club de lectura con amigos, elegimos un libro cada mes, compartimos notas por correo y luego nos reunimos en línea para comentar los capítulos más impactantes.",train
+train\sample_1764718555980.wav,El veloz murciélago hindú comía feliz cardillo y kiwi; la cigüeña tocaba el saxofón detrás del palenque de paja.,train
+train\sample_1764718585697.wav,"Javier quiso exhibir su álbum de cómics y explicó que cada dibujo mezclaba colores vivos, sombras y líneas suaves.",train
+train\sample_1764718617080.wav,"Yo añoro la lluvia suave de mayo porque deja el césped húmedo, perfuma el aire y hace cantar a las ranas en el jardín.",train
+train\sample_1764718678724.wav,"Cuando Guadalupe pronuncia ‘tlacuache’, ‘atlántico’ y ‘quetzal’, su acento revela la mezcla de lenguas indígenas y castellanas.",train
+train\sample_1764718706100.wav,El perro de Enrique corre alrededor del carro rojo y ladra alegremente cuando oye la campana del camión repartidor.,train
+train\sample_1764718736369.wav,"Zoe y Xavier juegan ajedrez mientras escuchan jazz; prueban chicles, bizcochos y un exquisito jugo de guayaba.",train
+train\sample_1764718767628.wav,"La niña que se llama Xiomara dibuja guitarras, xilófonos y cisnes; después narra cuentos sobre héroes, magos y duendes.",train
+train\sample_1764718800096.wav,"Mientras Braulio mezclaba el agua tibia con sal, escribió en voz alta palabras como ‘psicología’, ‘pterodáctilo’ y ‘gnomo’.",train
+train\sample_1764718828583.wav,"Hernán viajaba en autobús hacia Chiapas, escuchaba sones jarochos y degustaba tamales, mole y pozole con chile chipotle.",train
+train\sample_1764718860643.wav,"Lucía sonríe y dice que su sillón azul es más cómodo que la silla beige; luego bosteza, suspira y prepara un té de manzanilla.",train
+train\sample_1764718891672.wav,"El náufrago escribió ‘¡Socorro!’ en la arena, encendió una hoguera, y gritó fuerte hasta que vio acercarse un helicóptero.",train
+train\sample_1764718922881.wav,¿Qué juez juzgaría a Joaquín por hallar joyas junto a la verja? Quizá un jurado justo y jovial podría decidirlo.,train
+train\sample_1764713382350.wav,Mi nombre es Jorge,train
+train\sample_1764713608622.wav,en santa clara hace mucho calor,train
+train\sample_1764713648229.wav,"Me puedes decir la hora, por favor",train
+train\sample_1764713683220.wav,Nos vamos a ir al cine a las ocho de la noche,train
+train\sample_1764713701681.wav,"Por favor, coloca el libro sobre la mesa",train
+train\sample_1764713721919.wav,"Cierra la puerta cuando te vayas, por favor",train
+train\sample_1764713752629.wav,El gato es de color blanco con manchas negras,train
+train\sample_1764713883427.wav,"Despierto en mi cama, solo quiero tener un buen dia",train
+train\sample_1764713911957.wav,"Lo pienso en mi cabeza, entonces pasa lo que tiene que pasar",train
+train\sample_1764713942780.wav,"Son las doce en punto, tengo una reunion con mi equipo",train
+train\sample_1764713979450.wav,Luego voy a meditar alrededor de la una y treinta,train
+train\sample_1764714004424.wav,Enseguida voy al estudio escuchando algunas cosas que escribi,train
+train\sample_1764714079228.wav,"El buen karma es mi estetica, mantengo mi conciencia limpia",train
+train\sample_1764714105510.wav,Mantengo mi conciencia limpia por eso soy tan atractivo,train
+train\sample_1764714193492.wav,Tomo mi boligrafo y escribo algunas cartas de amor al cielo,train
+train\sample_1764714216322.wav,"Asi como magia, es como magia",train
+train\sample_1764714239172.wav,Consigo todo lo que quiero porque lo atraigo,train
+train\sample_1764714347532.wav,Dime por que tengo esta sensacion de que realmente quieres hablarme,train
+train\sample_1764714374610.wav,"Te veo intentado, subliminalmente intentando",train
+train\sample_1764714429256.wav,Para ver si voy a ser el que queda en tus brazos,train
+train\sample_1764714457848.wav,Admito que es emocionante,train
+train\sample_1764714485956.wav,"Pero antes de que te de falsas esperanzas, dime cual es tu motivo",train
+train\sample_1764714502569.wav,Cual es tu motivo?,train
+train\sample_1764714612193.wav,"Ahora que somos amigos, he decidido convertirte en mi nuevo proyecto",train
+train\sample_1764714662135.wav,"Popular, vas a ser popular",train
+train\sample_1764714683435.wav,Te voy a mostrar el comportamiento adecuado cuando hables con los demas,train
+train\sample_1764717339406.wav,"Que su carne no se rasgue, haz que su sangre no deje manchas aunque lo hieran",train
+train\sample_1764717367092.wav,"Haz que no sienta dolor, que sus huesos nunca se rompan",train
+train\sample_1764717408706.wav,Ninguna buena accion queda sin castigo,train
+train\sample_1764717435731.wav,"Ninguna buena accion queda impune, ese es mi nuevo credo",train
+train\sample_1764717490741.wav,"Claro, tengo buenas intenciones",train
+train\sample_1764717510590.wav,No prometo ninguna otra buena accion,train
+train\sample_1764717585819.wav,Quiza esa es la razon por la cual ninguna buena accion queda sin un castigo,train
+train\sample_1764717991160.wav,"Si les interesa encontrarme, miren hacia el cielo occidental",train
+train\sample_1764718020095.wav,"Alguien me dijo hace poco, todos merecen la oportunidad de volar",train
+train\sample_1764718038978.wav,"estoy volando solo, al menos vuelo libre",train
+train\sample_1764718092930.wav,Que me tacharon de malo diganles que estoy desafiando la gravedad,train
+train\sample_1764719163884.wav,El juez Joaquín juzgó la joya gemela mientras Jorge juraba no haberla hallado junto al viejo jardín.,train
+train\sample_1764719223264.wav,"Cada jueves hago yoga en silencio, respiro hondo y visualizo cómo se disipa cualquier tensión de mi cuerpo y mi mente.+",train
+train\sample_1764719651020.wav,"Beatriz organizó una excursión a Xochimilco con amigos, llevaron quesadillas, mole y pan de elote para compartir.",train
+train\sample_1764719676367.wav,El científico explicó que el quetzal es un ave sagrada y que su plumaje iridiscente inspiró leyendas en muchos pueblos.,train
+train\sample_1764719697620.wav,"Mientras Yolanda bordaba, escuchaba zarzuelas antiguas y tarareaba tonos agudos que resonaban en toda la sala.",train
+train\sample_1764719720560.wav,"Sergio compró xilófonos, zampoñas y marimbas para montar un taller donde niños y niñas experimentaran con ritmos diversos.",train
+train\sample_1764719752293.wav,"Algunos pingüinos se zambullen en aguas frías, baten las aletas y emergen con gracia antes de deslizarse sobre el hielo.",train
+train\sample_1764719772274.wav,"Héctor mezcló jengibre, zanahoria y lima para preparar un jugo vibrante que le devolviera energía en la mañana.",train
+train\sample_1764719795866.wav,"Quería escribir un cuento sobre robots que aprenden a bailar salsa, merengue y cumbia siguiendo instrucciones humanas.",train
+train\sample_1764719818203.wav,"La profesora de lingüística pidió grabar frases con ‘psicólogo’, ‘subterráneo’ y ‘examen’ para captar combinaciones poco comunes.",train
+train\sample_1764719844754.wav,"En la feria gastronómica probé ajíes, guisos andinos y un pastel de choclo que olía impresionante.",train
+train\sample_1764719864523.wav,"Zarina y Xiomara planearon una coreografía con zancos, cintas y xilófonos para inaugurar la fiesta regional.",train
+train\sample_1764730575952.wav,Hoy el clima estaba fresco y aprovechÃ© para dar una caminata corta. A veces un pequeÃ±o paseo cambia todo el dÃ­a.,train
+train\sample_1764730629709.wav,La tecnologÃ­a avanza tan rÃ¡pido que cada semana aparece algo nuevo. Es emocionante ver cÃ³mo cambia nuestro mundo.,train
+train\sample_1764730677373.wav,El cafÃ© de la maÃ±ana me ayuda a organizar mis ideas. Es como un pequeÃ±o impulso para empezar bien el dÃ­a.,train
+train\sample_1764730705247.wav,La naturaleza siempre sorprende con sus colores y sonidos. Basta detenerse un momento para apreciarla.,train
+train\sample_1764730726596.wav,"Aprender lleva tiempo, pero cada paso cuenta. Lo importante es no rendirse aunque avance lento.",train
+train\sample_1764730747759.wav,Viajar nos abre la mente y nos muestra nuevas culturas. Cada lugar enseÃ±a algo diferente.,train
+train\sample_1764730765076.wav,La creatividad aparece cuando estamos relajados. Una simple pausa puede inspirar una gran idea.,train
+train\sample_1764730783156.wav,La historia estÃ¡ llena de inventos que cambiaron todo. Es increÃ­ble cÃ³mo una idea puede transformar el futuro.,train
+train\sample_1764730803868.wav,Una buena conversaciÃ³n puede mejorar el dÃ­a. A veces solo necesitamos que alguien nos escuche.,train
+train\sample_1764730820173.wav,La mÃºsica conecta emociones y recuerdos. Un solo acorde puede cambiar nuestro Ã¡nimo.,train
+train\sample_1764730836566.wav,Mirar el cielo nocturno me hace pensar en lo pequeÃ±o que somos. El universo es enorme y fascinante.,train
+train\sample_1764730856130.wav,"Los retos ayudan a crecer, aunque no siempre lo parezca. Cada dificultad trae un aprendizaje.",train
+train\sample_1764730889280.wav,cocinar puede ser divertido y relajante. Mezclar sabores siempre trae sorpresas.,train
+train\sample_1764730908642.wav,Las decisiones pequeÃ±as tambiÃ©n importan. A veces cambian el rumbo de todo un dÃ­a,train
+train\sample_1764730926019.wav,Leer un libro es como entrar en otro mundo. Cada historia ofrece una nueva perspectiva.,train
+train\sample_1764730944814.wav,Hablar con claridad evita malentendidos. Expresar lo que sentimos siempre ayuda.,train
+train\sample_1764730963745.wav,Cada amanecer recuerda que podemos empezar de nuevo. Siempre hay una nueva oportunidad.,train
+train\sample_1764731010662.wav,La ciencia nos ha permitido resolver problemas enormes. Es una de las fuerzas más importantes del mundo moderno.,train
+train\sample_1764731068617.wav,A veces necesitamos descansar para seguir avanzando. El equilibrio también es parte del progreso.,train
+train\sample_1764731087642.wav,Los animales tienen comportamientos increíbles. La naturaleza está llena de inteligencia escondida.,train
+train\sample_1764731105899.wav,Las ciudades cambian a diario. Cada calle guarda historias nuevas.,train
+train\sample_1764731185595.wav,El arte expresa emociones que a veces no podemos decir. Una imagen puede decir mÃ¡s que mil palabras.,train
+train\sample_1764731204906.wav,Trabajar en equipo nos da nuevas ideas. La colaboración siempre mejora los resultados.,train
+train\sample_1764731220554.wav,"La paciencia es difícil, pero muy valiosa. Todo llega en su momento justo.",train
+train\sample_1764731245906.wav,Dormir bien cambia cómo enfrentamos el día. El descanso es una herramienta poderosa.,train
+train\sample_1764731264624.wav,El mar tiene un sonido que tranquiliza. Escuchar las olas siempre me relaja.,train
+train\sample_1764731284697.wav,Innovar significa pensar diferente. Las mejores ideas nacen cuando cuestionamos lo normal.,train
+train\sample_1764731302214.wav,"Los recuerdos aparecen con olores, sonidos o lugares. La memoria tiene su forma especial de sorprendernos.",train
+train\sample_1764731322458.wav,Cada persona ve el mundo de una manera única. Conocer esas perspectivas nos vuelve más empáticos.,train
+train\sample_1764731341964.wav,La disciplina construye resultados. Pequeños hábitos diarios hacen una gran diferencia.,train
+train\sample_1764731360657.wav,El universo es enorme y misterioso. Cada estrella es un recordatorio de lo mucho que hace falta por aprender.,train
+train\sample_1764731408407.wav,El deporte enseña constancia y esfuerzo. Cada entrenamiento suma un progreso.,train
+train\sample_1764731423996.wav,Los proyectos nacen de ideas pequeñas. Con dedicación se convierten en algo grande.,train
+train\sample_1764731441335.wav,Aprender un idioma abre puertas a nuevas culturas. Es un reto que vale la pena.,train
+train\sample_1764731456517.wav,La empatía fortalece nuestras relaciones. Escuchar al otro crea conexiones reales.,train

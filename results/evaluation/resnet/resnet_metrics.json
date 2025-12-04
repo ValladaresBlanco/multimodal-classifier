@@ -1,4 +1,22 @@
 {
+    "abyssinian": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "support": 5
+    },
+    "bengal": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "support": 5
+    },
+    "birman": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "support": 5
+    },
     "chihuahua": {
         "precision": 1.0,
         "recall": 1.0,
@@ -15,12 +33,12 @@
         "precision": 1.0,
         "recall": 1.0,
         "f1_score": 1.0,
-        "support": 5
+        "support": 4
     },
     "rose": {
-        "precision": 1.0,
+        "precision": 0.8571428571428571,
         "recall": 1.0,
-        "f1_score": 1.0,
+        "f1_score": 0.9230769230769231,
         "support": 6
     },
     "sunflower": {
@@ -31,14 +49,14 @@
     },
     "tulip": {
         "precision": 1.0,
-        "recall": 1.0,
-        "f1_score": 1.0,
+        "recall": 0.75,
+        "f1_score": 0.8571428571428571,
         "support": 4
     },
     "weighted_avg": {
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1_score": 1.0,
-        "support": 33
+        "precision": 0.9817629179331306,
+        "recall": 0.9787234042553191,
+        "f1_score": 0.9780219780219781,
+        "support": 47
     }
 }

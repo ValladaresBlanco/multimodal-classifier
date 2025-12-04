@@ -28,8 +28,8 @@ def set_seed(seed: int = 42) -> None:
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(seed)
             # Reproducible but may slow down
-                torch.backends.cudnn.ofterministic = True
-                torch.backends.cudnn.benchmark = False
+            torch.backends.cudnn.deterministic = True
+            torch.backends.cudnn.benchmark = False
     except Exception:
         # torch may not be available in some minimal test environments
         pass

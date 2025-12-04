@@ -1,7 +1,10 @@
 {
     "model_type": "mobilenet",
-    "num_classes": 6,
+    "num_classes": 9,
     "class_names": [
+        "abyssinian",
+        "bengal",
+        "birman",
         "chihuahua",
         "husky",
         "poodle",
@@ -9,7 +12,7 @@
         "sunflower",
         "tulip"
     ],
-    "final_val_accuracy": 96.96969696969697,
+    "final_val_accuracy": 93.61702127659575,
     "epochs": 20,
     "batch_size": 8,
     "learning_rate": 0.0001,
