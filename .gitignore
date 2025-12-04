@@ -3,10 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.so
+*.pyd
 .Python
 build/
 develop-eggs/
 dist/
+*.egg-info/
+.dist-info/
 downloads/
 eggs/
 .eggs/
@@ -23,11 +26,21 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+# IDE/editor configs
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
 # Virtual Environment
 venv/
 ENV/
 env/
 .venv
+
+# Model artifacts and checkpoints
+models/checkpoints/
+models/saved/
 
 # IDE
 .vscode/
@@ -36,8 +49,23 @@ env/
 *.swo
 *~
 
+
+# Results/visualizations/logs
+results/
+logs/
+
+
+# Temporary captures or recordings
+capture_*.wav
+capture_*.jpg
+
+
 # Jupyter Notebook
 .ipynb_checkpoints
+
+# Misc
+*.tmp
+*.bak
 
 # Dataset - Training images and audios (commented to allow image uploads)
 # data/raw/images/
